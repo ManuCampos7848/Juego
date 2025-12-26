@@ -1,0 +1,102 @@
+[gd_scene load_steps=12 format=3 uid="uid://8288fxo2rom1"]
+
+[ext_resource type="Script" uid="uid://7ty1kojyk2do" path="res://Art/Personaje/personaje.gd" id="1_i21ui"]
+[ext_resource type="PackedScene" uid="uid://b4ugjqivh8o4u" path="res://Art/Particulas/particulasCorrer.tscn" id="2_d8n1l"]
+[ext_resource type="Texture2D" uid="uid://vl372gcxlnnx" path="res://Art/Personalizacion/Rigth/Rigth1.png" id="2_fgch7"]
+[ext_resource type="PackedScene" uid="uid://4bsq5weejcxs" path="res://Art/Particulas/particulas_flores.tscn" id="2_mm4kw"]
+[ext_resource type="Texture2D" uid="uid://ggdtj0arsm4c" path="res://Art/Personalizacion/WalkDerecha/WalkD1.png" id="3_d8n1l"]
+[ext_resource type="PackedScene" uid="uid://c52iqkeq78k7p" path="res://Art/Personalizacion/Sombreros/sombreros.tscn" id="3_uggpa"]
+[ext_resource type="Texture2D" uid="uid://bog5xb34akaht" path="res://Art/Personalizacion/WalkIzquierda/WalkI1.png" id="4_mm4kw"]
+[ext_resource type="PackedScene" uid="uid://ch03mbgs5x4vm" path="res://Art/Personalizacion/Sombreros/SombrerosLateral/sombreros_lateral.tscn" id="6_d7mow"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6qdg4"]
+size = Vector2(16, 22)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_do2ux"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_fgch7")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_d8n1l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_fgch7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_mm4kw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_fgch7")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_03883"]
+size = Vector2(27.7778, 47.2222)
+
+[node name="Personaje" type="CharacterBody2D"]
+scale = Vector2(0.6, 0.6)
+script = ExtResource("1_i21ui")
+
+[node name="ParticulasFlores" parent="." instance=ExtResource("2_mm4kw")]
+position = Vector2(0, 10)
+
+[node name="CPUParticles2D" parent="." instance=ExtResource("2_d8n1l")]
+visible = false
+position = Vector2(-9.53674e-07, 10)
+emitting = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_6qdg4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_do2ux")
+animation = &"walk"
+
+[node name="Accesorios" type="Node2D" parent="."]
+
+[node name="Sombreros" parent="Accesorios" instance=ExtResource("3_uggpa")]
+
+[node name="Sombrero3" parent="Accesorios/Sombreros" index="2"]
+position = Vector2(0, -8.33333)
+
+[node name="Sombrero4" parent="Accesorios/Sombreros" index="3"]
+position = Vector2(0, 1.66667)
+
+[node name="Sombrero8" parent="Accesorios/Sombreros" index="7"]
+visible = true
+
+[node name="SombrerosLateral" parent="Accesorios" instance=ExtResource("6_d7mow")]
+visible = false
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+scale = Vector2(0.6, 0.6)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1.32455e-06, 4.16667)
+shape = SubResource("RectangleShape2D_03883")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
+limit_left = 20
+limit_bottom = 650
+
+[connection signal="barreraBajaPierde" from="." to="." method="_on_barrera_baja_pierde"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+
+[editable path="Accesorios/Sombreros"]

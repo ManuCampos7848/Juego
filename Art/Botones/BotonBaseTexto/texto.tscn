@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://btr84368aycgy"]
+
+[ext_resource type="FontFile" uid="uid://j5gk66gtjfdj" path="res://Art/Font/Super Cartoon.ttf" id="1_6n2is"]
+
+[node name="Texto" type="Label"]
+texture_filter = 2
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("1_6n2is")
+theme_override_font_sizes/font_size = 124
+text = "asd"

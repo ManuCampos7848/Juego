@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cm6ue3inx4k3w"]
+
+[ext_resource type="Texture2D" uid="uid://r7y2jo4xpisd" path="res://Art/TileMap/MapaCielo/Bloques Desprendimiento/Block1.png" id="1_eaiq2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vhtrw"]
+size = Vector2(32, 8)
+
+[node name="Elevador" type="AnimatableBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_eaiq2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_vhtrw")

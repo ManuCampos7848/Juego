@@ -1,0 +1,163 @@
+[gd_scene load_steps=19 format=3 uid="uid://dottnihn6c77w"]
+
+[ext_resource type="Script" uid="uid://dfv1v03px73q2" path="res://mundo.gd" id="1_kjq7n"]
+[ext_resource type="Texture2D" uid="uid://cwslomajri3cd" path="res://Art/TileMap/MapaCielo/Back.png" id="2_744hw"]
+[ext_resource type="PackedScene" uid="uid://chbd8h0ksv6s1" path="res://burbujas.tscn" id="4_qrhk7"]
+[ext_resource type="Texture2D" uid="uid://boxjotc5h0nld" path="res://Art/Cielo.png" id="5_nddul"]
+[ext_resource type="Texture2D" uid="uid://ttg4co6ik62n" path="res://Art/Botones/Izquierda.png" id="6_6khlg"]
+[ext_resource type="Texture2D" uid="uid://b50bjolek8wns" path="res://Art/Botones/IzquierdaPressed.png" id="7_mb2i5"]
+[ext_resource type="Texture2D" uid="uid://ecrc1xbqyrgb" path="res://Art/Botones/Derecha.png" id="8_4wsc1"]
+[ext_resource type="Texture2D" uid="uid://cb2arsmr46v3c" path="res://Art/Botones/DerechaPressed.png" id="9_3hbak"]
+[ext_resource type="PackedScene" uid="uid://cy53ufnec71gc" path="res://perder.tscn" id="9_fqb7b"]
+[ext_resource type="PackedScene" uid="uid://gg0pfofkfjb" path="res://Art/Prueba/NubePrueba.tscn" id="10_e7mch"]
+[ext_resource type="Texture2D" uid="uid://c4w4om2do01xg" path="res://Art/Botones/SaltoHover.png" id="10_n2qbt"]
+[ext_resource type="Texture2D" uid="uid://c6r3u7klsddj4" path="res://Art/Botones/SaltoPressed.png" id="11_dvjjk"]
+[ext_resource type="PackedScene" uid="uid://wsakxayj4ti0" path="res://Art/TileMap/MapaCielo/Bloques Desprendimiento/NubeCaida.tscn" id="11_qcc2h"]
+[ext_resource type="PackedScene" uid="uid://8288fxo2rom1" path="res://Art/Personaje/personaje.tscn" id="16_qiu26"]
+[ext_resource type="PackedScene" uid="uid://cm2nwnsfbomfu" path="res://contador_vida.tscn" id="18_6hpp2"]
+[ext_resource type="PackedScene" uid="uid://cm6ue3inx4k3w" path="res://Art/TileMap/MapaCielo/elevador.tscn" id="19_8lmmg"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_d1p0t"]
+font_size = 60
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_744hw"]
+size = Vector2(216, 20)
+
+[node name="Mundo" type="Node2D"]
+script = ExtResource("1_kjq7n")
+
+[node name="Back" type="Sprite2D" parent="."]
+position = Vector2(1232, 348.12497)
+scale = Vector2(2.40625, 1.2931999)
+texture = ExtResource("2_744hw")
+
+[node name="NubesJuntas" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(170, 554)
+scale = Vector2(0.1, 0.1)
+
+[node name="NubesJuntas2" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(510, 554)
+scale = Vector2(0.1, 0.1)
+flip_h = true
+
+[node name="NubesJuntas3" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(850, 554)
+scale = Vector2(0.1, 0.1)
+
+[node name="NubesJuntas4" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1190, 554)
+scale = Vector2(0.1, 0.1)
+flip_h = true
+
+[node name="NubesJuntas5" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1530, 554)
+scale = Vector2(0.1, 0.1)
+
+[node name="NubesJuntas6" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1870, 554)
+scale = Vector2(0.1, 0.1)
+flip_h = true
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1440, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+visible = false
+position = Vector2(1331.56, 419.048)
+scale = Vector2(1.43109, 0.589797)
+texture = ExtResource("5_nddul")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
+follow_viewport_scale = 2.0
+
+[node name="ButIzquierda" type="TouchScreenButton" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0.701961)
+texture_filter = 1
+position = Vector2(66, 504)
+scale = Vector2(0.7, 0.659)
+texture_normal = ExtResource("6_6khlg")
+texture_pressed = ExtResource("7_mb2i5")
+action = "ui_left"
+
+[node name="ButDerecha" type="TouchScreenButton" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0.701961)
+texture_filter = 1
+position = Vector2(248, 488)
+scale = Vector2(0.7, 0.659)
+texture_normal = ExtResource("8_4wsc1")
+texture_pressed = ExtResource("9_3hbak")
+action = "ui_right"
+
+[node name="Boton_salto" type="TouchScreenButton" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0.701961)
+texture_filter = 1
+position = Vector2(952, 504)
+scale = Vector2(0.7, 0.659)
+texture_normal = ExtResource("10_n2qbt")
+texture_pressed = ExtResource("11_dvjjk")
+action = "ui_accept"
+
+[node name="ContadorVida" parent="." instance=ExtResource("18_6hpp2")]
+
+[node name="Burbujas" parent="." instance=ExtResource("4_qrhk7")]
+position = Vector2(146, 603)
+scale = Vector2(0.5, 0.5)
+
+[node name="Burbujas2" parent="." instance=ExtResource("4_qrhk7")]
+position = Vector2(305, 605)
+scale = Vector2(0.5, 0.5)
+
+[node name="Personaje" parent="." instance=ExtResource("16_qiu26")]
+position = Vector2(600, 180)
+
+[node name="Perder" parent="." instance=ExtResource("9_fqb7b")]
+position = Vector2(-279, 680)
+
+[node name="StaticBody2D" parent="." instance=ExtResource("10_e7mch")]
+position = Vector2(262, 626)
+
+[node name="NubeCaer" parent="." instance=ExtResource("11_qcc2h")]
+position = Vector2(616, 579)
+
+[node name="NubeCaer2" parent="." instance=ExtResource("11_qcc2h")]
+position = Vector2(680, 579)
+
+[node name="NubeCaer3" parent="." instance=ExtResource("11_qcc2h")]
+position = Vector2(904, 575)
+
+[node name="NubeCaer4" parent="." instance=ExtResource("11_qcc2h")]
+position = Vector2(936, 575)
+
+[node name="NubeCaer5" parent="." instance=ExtResource("11_qcc2h")]
+position = Vector2(968, 575)
+
+[node name="Elevador" parent="." instance=ExtResource("19_8lmmg")]
+position = Vector2(1952, 435)
+
+[node name="Ganaste" type="Label" parent="."]
+offset_left = 208.0
+offset_top = 248.0
+offset_right = 582.0
+offset_bottom = 331.0
+scale = Vector2(0.5, 0.5)
+text = "!!! Ganaste !!!"
+label_settings = SubResource("LabelSettings_d1p0t")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(545, 213)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(98, 0)
+shape = SubResource("RectangleShape2D_744hw")
+
+[connection signal="barreraBajaPierde" from="Personaje" to="." method="_on_personaje_barrera_baja_pierde"]

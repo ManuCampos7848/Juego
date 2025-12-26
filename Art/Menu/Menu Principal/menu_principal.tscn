@@ -1,0 +1,275 @@
+[gd_scene load_steps=29 format=3 uid="uid://ck7idj2otqth2"]
+
+[ext_resource type="Script" uid="uid://dregloms00b4a" path="res://Art/Menu/Menu Principal/menu_principal.gd" id="1_bq1sv"]
+[ext_resource type="Texture2D" uid="uid://d10qxpmnwhy2o" path="res://Art/Menu/Menu Principal/BtnNiveles.png" id="1_snche"]
+[ext_resource type="Texture2D" uid="uid://blvu8dbypwlv8" path="res://Art/Menu/Menu Principal/BtnPersonalizar.png" id="2_0kn2n"]
+[ext_resource type="Shader" uid="uid://dcix4qnd8pcom" path="res://Art/Menu/scroll.gdshader" id="2_njfe6"]
+[ext_resource type="Texture2D" uid="uid://minddxr3d5a" path="res://Art/Menu/VariasEstrellas.png" id="3_2yo5o"]
+[ext_resource type="Texture2D" uid="uid://c6rbgi2jxsml2" path="res://Art/Menu/Menu Principal/BtnCreditos.png" id="3_3jp5v"]
+[ext_resource type="Texture2D" uid="uid://cbpkqei5k6oqd" path="res://Art/Menu/Menu Principal/BtnSalir.png" id="4_a38lc"]
+[ext_resource type="Texture2D" uid="uid://dhn3ilp1iarav" path="res://Art/Menu/Menu Principal/BtnAjustes.png" id="4_baunw"]
+[ext_resource type="Texture2D" uid="uid://c5ywmygpg3i45" path="res://Art/Personalizacion/Front/Front1.png" id="5_bq1sv"]
+[ext_resource type="PackedScene" uid="uid://c52iqkeq78k7p" path="res://Art/Personalizacion/Sombreros/sombreros.tscn" id="6_a38lc"]
+[ext_resource type="Texture2D" uid="uid://b1xgso7vcl80r" path="res://Art/Personalizacion/Cabello/Cabello1.png" id="10_ru0sp"]
+[ext_resource type="Texture2D" uid="uid://d0dgie6hpfrds" path="res://Art/Personalizacion/Cabello/Cabello2.png" id="11_l1ex1"]
+[ext_resource type="Texture2D" uid="uid://se30dpdryp7i" path="res://Art/Personalizacion/Cabello/Cabello3.png" id="12_w6kxh"]
+[ext_resource type="Texture2D" uid="uid://bbw7gkv575nyw" path="res://Art/Personalizacion/Cabello/Cabello4.png" id="13_3cwcl"]
+[ext_resource type="Texture2D" uid="uid://cktmyvd6k83bj" path="res://Art/Personalizacion/Cabello/Cabello5.png" id="14_uj3jt"]
+[ext_resource type="Texture2D" uid="uid://ctey3y1smw3rw" path="res://Art/Personalizacion/Cabello/Cabello6.png" id="15_ckul6"]
+[ext_resource type="Texture2D" uid="uid://l5bqm3s4rjky" path="res://Art/Personalizacion/Ropa/Ropa2.png" id="16_w6kxh"]
+[ext_resource type="Texture2D" uid="uid://da8s8d2itas8v" path="res://Art/Personalizacion/Sombreros/Sombrero9.png" id="17_shreg"]
+[ext_resource type="Texture2D" uid="uid://biku4ukisggvw" path="res://Art/Personalizacion/Ropa/Ropa3.png" id="17_to5rn"]
+[ext_resource type="Texture2D" uid="uid://gw20u32xaagd" path="res://Art/Personalizacion/Sombreros/Sombreros10.png" id="18_422h3"]
+[ext_resource type="Texture2D" uid="uid://sftu3yufyeg7" path="res://Art/Personalizacion/Ropa/Ropa4.png" id="18_ckul6"]
+[ext_resource type="Texture2D" uid="uid://brbgw3j8e2xu6" path="res://Art/Personalizacion/Ropa/Ropa7.png" id="19_ckul6"]
+[ext_resource type="Texture2D" uid="uid://dqayfgpjv2ogt" path="res://Art/Personalizacion/Sombreros/Sombrero11.png" id="19_g822v"]
+[ext_resource type="Texture2D" uid="uid://bigvw4gxvxiq5" path="res://Art/Personalizacion/Ropa/Ropa6.png" id="20_ckul6"]
+[ext_resource type="Texture2D" uid="uid://cnvkmmg1hh3sn" path="res://Art/Personalizacion/Ropa/Ropa1.png" id="20_phiyn"]
+[ext_resource type="Texture2D" uid="uid://csy61qddb1rh" path="res://Art/Personalizacion/Ropa/Patita.png" id="21_phiyn"]
+[ext_resource type="Texture2D" uid="uid://5kvonywkuhmu" path="res://Art/Menu/Menu Principal/BtnPersonalizarPressed.png" id="24_422h3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pqj5o"]
+shader = ExtResource("2_njfe6")
+
+[node name="MenuPrincipal" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bq1sv")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.376471, 0.376471, 0.439216, 1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("ShaderMaterial_pqj5o")
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("3_2yo5o")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+
+[node name="PlayerFront" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(778, 353)
+scale = Vector2(6, 6)
+texture = ExtResource("5_bq1sv")
+
+[node name="Cabellos" type="Node2D" parent="."]
+position = Vector2(-86, 33)
+
+[node name="Cabello1" type="Sprite2D" parent="Cabellos"]
+visible = false
+texture_filter = 1
+position = Vector2(858.0002, 305)
+scale = Vector2(11.9, 12)
+texture = ExtResource("10_ru0sp")
+
+[node name="Cabello2" type="Sprite2D" parent="Cabellos"]
+texture_filter = 1
+position = Vector2(858.0002, 305)
+scale = Vector2(11.9, 12)
+texture = ExtResource("11_l1ex1")
+
+[node name="Cabello3" type="Sprite2D" parent="Cabellos"]
+visible = false
+texture_filter = 1
+position = Vector2(858.0002, 305)
+scale = Vector2(11.9, 12)
+texture = ExtResource("12_w6kxh")
+
+[node name="Cabello4" type="Sprite2D" parent="Cabellos"]
+visible = false
+texture_filter = 1
+position = Vector2(858.0002, 305)
+scale = Vector2(12, 12.101)
+texture = ExtResource("13_3cwcl")
+
+[node name="Cabello5" type="Sprite2D" parent="Cabellos"]
+visible = false
+texture_filter = 1
+position = Vector2(858.0002, 305)
+scale = Vector2(12, 12.101)
+texture = ExtResource("14_uj3jt")
+
+[node name="Cabello6" type="Sprite2D" parent="Cabellos"]
+visible = false
+texture_filter = 1
+position = Vector2(858.0002, 305)
+scale = Vector2(11.9, 12)
+texture = ExtResource("15_ckul6")
+
+[node name="Sombreros" parent="." instance=ExtResource("6_a38lc")]
+position = Vector2(778, 129)
+scale = Vector2(7, 7)
+
+[node name="Sombrero1" parent="Sombreros" index="0"]
+visible = true
+position = Vector2(-1.0000038, 28.285711)
+scale = Vector2(1.8, 1.8)
+
+[node name="Sombrero2" parent="Sombreros" index="1"]
+position = Vector2(-0.85715103, 24.999992)
+scale = Vector2(1.4, 1.4)
+
+[node name="Sombrero3" parent="Sombreros" index="2"]
+position = Vector2(-0.5714264, 24.999992)
+scale = Vector2(1.4, 1.4)
+
+[node name="Sombrero4" parent="Sombreros" index="3"]
+position = Vector2(-1, 27.571398)
+scale = Vector2(1.8, 1.5)
+
+[node name="Sombrero5" parent="Sombreros" index="4"]
+position = Vector2(-0.7142868, 26.42857)
+scale = Vector2(1.4, 1.4)
+
+[node name="Sombrero6" parent="Sombreros" index="5"]
+position = Vector2(-0.8571472, 27.57143)
+scale = Vector2(1.4, 1.4)
+
+[node name="Sombrero7" parent="Sombreros" index="6"]
+position = Vector2(-3.1428604, 27.142847)
+scale = Vector2(1.4, 1.4)
+
+[node name="Sombrero8" parent="Sombreros" index="7"]
+position = Vector2(-0.57143784, 26.28571)
+scale = Vector2(1.4, 1.4)
+
+[node name="Sombrero9" type="Sprite2D" parent="Sombreros"]
+visible = false
+texture_filter = 1
+position = Vector2(-0.7142792, 23.714281)
+scale = Vector2(1.4, 1.4)
+texture = ExtResource("17_shreg")
+
+[node name="Sombrero10" type="Sprite2D" parent="Sombreros"]
+visible = false
+texture_filter = 1
+position = Vector2(-0.7142792, 23.714281)
+scale = Vector2(1.4, 1.4)
+texture = ExtResource("18_422h3")
+
+[node name="Sombrero11" type="Sprite2D" parent="Sombreros"]
+visible = false
+texture_filter = 1
+position = Vector2(-1.3857155, 29.285675)
+scale = Vector2(1.7895088, 1.5)
+texture = ExtResource("19_g822v")
+
+[node name="Ropa" type="Node2D" parent="."]
+texture_filter = 1
+position = Vector2(783, 406)
+
+[node name="Ropa3" type="Sprite2D" parent="Ropa"]
+visible = false
+position = Vector2(-5, 16)
+scale = Vector2(12.012, 12)
+texture = ExtResource("17_to5rn")
+
+[node name="Ropa4" type="Sprite2D" parent="Ropa"]
+visible = false
+position = Vector2(-5.000061, 22.00003)
+scale = Vector2(12.012, 12)
+texture = ExtResource("18_ckul6")
+
+[node name="Ropa6" type="Sprite2D" parent="Ropa"]
+position = Vector2(-5, 76.04166)
+scale = Vector2(12.005991, 12.020826)
+texture = ExtResource("19_ckul6")
+
+[node name="Ropa2" type="Sprite2D" parent="Ropa"]
+visible = false
+position = Vector2(-5.000061, 40.00003)
+scale = Vector2(12.012, 12)
+texture = ExtResource("16_w6kxh")
+
+[node name="Ropa5" type="Sprite2D" parent="Ropa"]
+visible = false
+position = Vector2(-5.000061, 22.00003)
+scale = Vector2(11.995, 12)
+texture = ExtResource("20_ckul6")
+
+[node name="Ropa1" type="Sprite2D" parent="Ropa"]
+visible = false
+position = Vector2(-5, 16)
+scale = Vector2(12.012, 12)
+texture = ExtResource("20_phiyn")
+
+[node name="Patita" type="Sprite2D" parent="."]
+position = Vector2(754, 515)
+scale = Vector2(11.999994, 6.0000305)
+texture = ExtResource("21_phiyn")
+
+[node name="Patita2" type="Sprite2D" parent="."]
+position = Vector2(802, 515)
+scale = Vector2(11.999994, 6.0000305)
+texture = ExtResource("21_phiyn")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 40.0
+offset_top = 80.0
+offset_right = 159.0
+offset_bottom = 103.0
+scale = Vector2(3, 3)
+texture_normal = ExtResource("1_snche")
+texture_pressed = ExtResource("1_snche")
+
+[node name="TextureButton2" type="TextureButton" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 40.0
+offset_top = 174.0
+offset_right = 159.0
+offset_bottom = 197.0
+scale = Vector2(3, 3)
+texture_normal = ExtResource("2_0kn2n")
+texture_pressed = ExtResource("24_422h3")
+
+[node name="TextureButton5" type="TextureButton" parent="."]
+visible = false
+texture_filter = 1
+layout_mode = 0
+offset_left = 29.0
+offset_top = 203.0
+offset_right = 157.0
+offset_bottom = 267.0
+scale = Vector2(3, 3)
+texture_normal = ExtResource("4_baunw")
+
+[node name="TextureButton3" type="TextureButton" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 40.0
+offset_top = 367.0
+offset_right = 159.0
+offset_bottom = 390.0
+scale = Vector2(3, 3)
+texture_normal = ExtResource("3_3jp5v")
+texture_pressed = ExtResource("24_422h3")
+
+[node name="TextureButton4" type="TextureButton" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 40.0
+offset_top = 503.0
+offset_right = 159.0
+offset_bottom = 526.0
+scale = Vector2(3, 3)
+texture_normal = ExtResource("4_a38lc")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="TextureButton2" to="." method="_on_texture_button_2_pressed"]
+
+[editable path="Sombreros"]

@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://q4qfpjsllmhv"]
+
+[ext_resource type="PackedScene" uid="uid://cvmtd70p3v2ml" path="res://ScriptPruebas/Queputas.tscn" id="1_s1ap6"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorSkins" parent="." instance=ExtResource("1_s1ap6")]

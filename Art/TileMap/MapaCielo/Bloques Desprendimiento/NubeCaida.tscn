@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://wsakxayj4ti0"]
+
+[ext_resource type="Texture2D" uid="uid://r7y2jo4xpisd" path="res://Art/TileMap/MapaCielo/Bloques Desprendimiento/Block1.png" id="1_bpl8t"]
+[ext_resource type="Script" uid="uid://q6kxo76j8ouy" path="res://Art/TileMap/MapaCielo/Bloques Desprendimiento/NubeCaida.gd" id="1_g8vo2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k8uhu"]
+size = Vector2(32, 8)
+
+[node name="NubeCaer" type="AnimatableBody2D" groups=["bloqueDesprendido"]]
+script = ExtResource("1_g8vo2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_bpl8t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_k8uhu")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-2.38419e-07, 2.38419e-07)
+scale = Vector2(1.6, 0.4)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

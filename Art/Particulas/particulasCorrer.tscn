@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4ugjqivh8o4u"]
+
+[ext_resource type="Texture2D" uid="uid://c2pbya1iecbbv" path="res://Art/Particulas/Particula1.png" id="1_5yyvh"]
+
+[sub_resource type="Curve" id="Curve_5yyvh"]
+_limits = [-200.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.203911, 13.2296), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_qf7bg"]
+_data = [Vector2(1e-05, 0.984436), 0.0, 0.0, 0, 0, Vector2(0.969274, 0.22179), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="CPUParticles2D" type="CPUParticles2D"]
+texture_filter = 1
+amount = 100
+texture = ExtResource("1_5yyvh")
+lifetime = 0.3
+spread = 10.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 2.0
+initial_velocity_max = 2.0
+linear_accel_min = 10.0
+linear_accel_max = 20.31
+linear_accel_curve = SubResource("Curve_5yyvh")
+scale_amount_min = 0.1
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_qf7bg")

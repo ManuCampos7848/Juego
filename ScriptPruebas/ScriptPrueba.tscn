@@ -1,0 +1,62 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqfivyr8y2411"]
+
+[ext_resource type="Script" uid="uid://cxde58bxsf38w" path="res://ScriptPruebas/ScriptPrueba.gd" id="1_mqyi0"]
+[ext_resource type="PackedScene" uid="uid://c52iqkeq78k7p" path="res://Art/Personalizacion/Sombreros/sombreros.tscn" id="2_7es5i"]
+
+[node name="ScriptPrueba" type="Node"]
+script = ExtResource("1_mqyi0")
+
+[node name="BotonSiguienteSombrero" type="Button" parent="."]
+offset_left = 736.0
+offset_top = 62.0
+offset_right = 1054.0
+offset_bottom = 205.0
+text = "Cambiar Sombrero"
+
+[node name="Iniciar" type="Button" parent="."]
+offset_left = 464.0
+offset_top = 502.0
+offset_right = 701.0
+offset_bottom = 596.0
+text = "Iniciar"
+
+[node name="CombinarSombrero" type="Button" parent="."]
+offset_left = 736.0
+offset_top = 233.0
+offset_right = 1054.0
+offset_bottom = 376.0
+text = "Combinar Sombrero"
+
+[node name="Sombreros" parent="." instance=ExtResource("2_7es5i")]
+position = Vector2(550, 271)
+scale = Vector2(4, 4)
+
+[node name="Sombrero1" parent="Sombreros" index="0"]
+visible = true
+
+[node name="Sombrero2" parent="Sombreros" index="1"]
+visible = true
+
+[node name="Sombrero3" parent="Sombreros" index="2"]
+visible = true
+
+[node name="Sombrero4" parent="Sombreros" index="3"]
+visible = true
+
+[node name="Sombrero5" parent="Sombreros" index="4"]
+visible = true
+
+[node name="Sombrero6" parent="Sombreros" index="5"]
+visible = true
+
+[node name="Sombrero7" parent="Sombreros" index="6"]
+visible = true
+
+[node name="Sombrero8" parent="Sombreros" index="7"]
+visible = true
+
+[connection signal="pressed" from="BotonSiguienteSombrero" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="Iniciar" to="." method="_on_iniciar_pressed"]
+[connection signal="pressed" from="CombinarSombrero" to="." method="_on_combinar_sombrero_pressed"]
+
+[editable path="Sombreros"]

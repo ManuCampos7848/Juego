@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://by2pf7feypmjt"]
+
+[ext_resource type="Script" uid="uid://bswswrtjomfrl" path="res://Art/Menu/menu_inicio.gd" id="1_7ecat"]
+[ext_resource type="Texture2D" uid="uid://bmpfwlyoa2vfj" path="res://Art/Menu/Background.png" id="4_t3ae5"]
+[ext_resource type="Texture2D" uid="uid://cl2lyjicyl157" path="res://Art/Menu/PresStart.png" id="6_jm285"]
+[ext_resource type="Texture2D" uid="uid://igg5o4rlafae" path="res://Art/Menu/Logo.png" id="6_kqalk"]
+[ext_resource type="Shader" uid="uid://dcix4qnd8pcom" path="res://Art/Menu/scroll.gdshader" id="7_hi77d"]
+[ext_resource type="Texture2D" uid="uid://minddxr3d5a" path="res://Art/Menu/VariasEstrellas.png" id="8_lw3be"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ldmsi"]
+shader = ExtResource("7_hi77d")
+
+[node name="MenuInicio" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7ecat")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(576, 323.75)
+scale = Vector2(1.125, 1.0376)
+texture = ExtResource("4_t3ae5")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("ShaderMaterial_ldmsi")
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("8_lw3be")
+
+[node name="Logo" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(551.99994, 326.74997)
+scale = Vector2(1.125, 1.0376)
+texture = ExtResource("6_kqalk")
+
+[node name="PresStart" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(546, 215)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("6_jm285")
+
+[node name="Iniciar" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Parce"
+
+[connection signal="pressed" from="Iniciar" to="." method="_on_iniciar_pressed"]

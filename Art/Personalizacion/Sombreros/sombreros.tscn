@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=3 uid="uid://c52iqkeq78k7p"]
+
+[ext_resource type="Texture2D" uid="uid://bdkxlsro8j42o" path="res://Art/Personalizacion/Sombreros/Sombrero1.png" id="1_jdfjl"]
+[ext_resource type="Texture2D" uid="uid://bnyrmivpyhihf" path="res://Art/Personalizacion/Sombreros/Sombrero2.png" id="2_agevg"]
+[ext_resource type="Texture2D" uid="uid://tgtsinfewks" path="res://Art/Personalizacion/Sombreros/Sombrero3.png" id="3_1kgrq"]
+[ext_resource type="Texture2D" uid="uid://21dxyn04rnu2" path="res://Art/Personalizacion/Sombreros/Sombrero4.png" id="4_r4drx"]
+[ext_resource type="Texture2D" uid="uid://dkgo1awanw6eg" path="res://Art/Personalizacion/Sombreros/Sombrero5.png" id="5_1nhoj"]
+[ext_resource type="Texture2D" uid="uid://bxsujbxnljlwo" path="res://Art/Personalizacion/Sombreros/Sombrero6.png" id="6_16fqr"]
+[ext_resource type="Texture2D" uid="uid://clu5drpmyf8pi" path="res://Art/Personalizacion/Sombreros/Sombrero7.png" id="7_o00if"]
+[ext_resource type="Texture2D" uid="uid://cbtdht50hkhgw" path="res://Art/Personalizacion/Sombreros/Sombrero8.png" id="8_1thy6"]
+
+[node name="Sombreros" type="Node2D"]
+
+[node name="Sombrero1" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+texture = ExtResource("1_jdfjl")
+
+[node name="Sombrero2" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+texture = ExtResource("2_agevg")
+
+[node name="Sombrero3" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+texture = ExtResource("3_1kgrq")
+
+[node name="Sombrero4" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+texture = ExtResource("4_r4drx")
+
+[node name="Sombrero5" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+texture = ExtResource("5_1nhoj")
+
+[node name="Sombrero6" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+texture = ExtResource("6_16fqr")
+
+[node name="Sombrero7" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+texture = ExtResource("7_o00if")
+
+[node name="Sombrero8" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+texture = ExtResource("8_1thy6")

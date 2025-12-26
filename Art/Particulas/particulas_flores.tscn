@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://4bsq5weejcxs"]
+
+[ext_resource type="Texture2D" uid="uid://cc18xhany7klm" path="res://Art/Particulas/Particula2.png" id="1_wjyxw"]
+
+[node name="ParticulasFlores" type="CPUParticles2D"]
+texture_filter = 1
+texture = ExtResource("1_wjyxw")
+lifetime = 1.5
+gravity = Vector2(0, 0)
+initial_velocity_min = 61.61
+initial_velocity_max = 61.61
+linear_accel_min = 14.14
+linear_accel_max = 14.14
+scale_amount_min = 0.1
+scale_amount_max = 0.5

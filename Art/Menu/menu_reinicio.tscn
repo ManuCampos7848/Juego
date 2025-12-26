@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=3 uid="uid://cu5al1n58inr5"]
+
+[ext_resource type="Texture2D" uid="uid://ctrxgh3tskwru" path="res://Art/Botones/But_Reiniciar.png" id="1_a0byp"]
+[ext_resource type="Script" uid="uid://nmb0jt5vi0c1" path="res://Art/Menu/menu_reinicio.gd" id="1_x0nfh"]
+[ext_resource type="Texture2D" uid="uid://2i6xoxaa280k" path="res://Art/Botones/ReiniciarPressed.png" id="2_ncht4"]
+
+[node name="MenuReinicio" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x0nfh")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.0313726, 0.00392157, 0.00392157, 1)
+
+[node name="Button" type="TextureButton" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -410.0
+offset_right = 256.0
+offset_bottom = 102.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("1_a0byp")
+texture_pressed = ExtResource("2_ncht4")
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 466.0
+offset_top = 378.0
+offset_right = 693.0
+offset_bottom = 499.0
+text = "Volver de  0"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

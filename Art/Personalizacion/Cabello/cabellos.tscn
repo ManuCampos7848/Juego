@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://dqgc7802hxyim"]
+
+[ext_resource type="Texture2D" path="res://Art/Personalizacion/Cabello/cabello (1).png" id="1_u8dk2"]
+[ext_resource type="Texture2D" path="res://Art/Personalizacion/Cabello/cabello (2).png" id="2_j12yb"]
+[ext_resource type="Texture2D" path="res://Art/Personalizacion/Cabello/cabello (3).png" id="3_564l5"]
+[ext_resource type="Texture2D" path="res://Art/Personalizacion/Cabello/cabello (4).png" id="4_gh4o3"]
+[ext_resource type="Texture2D" path="res://Art/Personalizacion/Cabello/cabello (5).png" id="5_jfely"]
+[ext_resource type="Texture2D" path="res://Art/Personalizacion/Cabello/cabello (6).png" id="6_k02gx"]
+
+[node name="Cabellos" type="Node2D"]
+texture_filter = 1
+position = Vector2(865, 212)
+
+[node name="Cabello1" type="Sprite2D" parent="."]
+position = Vector2(-7, 93)
+scale = Vector2(11.9, 12)
+texture = ExtResource("1_u8dk2")
+
+[node name="Cabello2" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-7, 93)
+scale = Vector2(11.9, 12)
+texture = ExtResource("2_j12yb")
+
+[node name="Cabello3" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(2, 80)
+scale = Vector2(11.9, 12)
+texture = ExtResource("3_564l5")
+
+[node name="Cabello4" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-7, 93)
+scale = Vector2(12, 12)
+texture = ExtResource("4_gh4o3")
+
+[node name="Cabello5" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-7, 92)
+scale = Vector2(12, 12)
+texture = ExtResource("5_jfely")
+
+[node name="Cabello6" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-7, 93)
+scale = Vector2(12, 12)
+texture = ExtResource("6_k02gx")

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dj1y6h7dilcdt"]
+
+[ext_resource type="FontFile" uid="uid://owlvmdi7quj8" path="res://Art/Font/Xolonium-Regular.ttf" id="1_2hdes"]
+
+[sub_resource type="FontVariation" id="FontVariation_tsq5q"]
+base_font = ExtResource("1_2hdes")
+
+[sub_resource type="LabelSettings" id="LabelSettings_5q4nd"]
+font = SubResource("FontVariation_tsq5q")
+font_size = 124
+
+[node name="Label" type="Label"]
+offset_left = 407.0
+offset_top = 217.0
+offset_right = 785.0
+offset_bottom = 387.0
+scale = Vector2(0.5, 0.5)
+text = "drerer"
+label_settings = SubResource("LabelSettings_5q4nd")

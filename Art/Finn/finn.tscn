@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=3 uid="uid://bvulyqkdtl52y"]
+
+[ext_resource type="Script" uid="uid://b0e85o3rm8up8" path="res://Art/Finn/finn.gd" id="1_b705a"]
+[ext_resource type="Texture2D" uid="uid://htpxidsflpw6" path="res://Art/Finn/Finn_idle.png" id="1_w60np"]
+[ext_resource type="Texture2D" uid="uid://6qut0v37ulch" path="res://Art/Finn/Finn_walk2.png" id="2_rcocp"]
+[ext_resource type="Texture2D" uid="uid://ienjvxyoichc" path="res://Art/Finn/Finn_walk.png" id="3_fd50s"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hmlph"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_w60np")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_rcocp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_w60np")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_fd50s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_w60np")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vm76k"]
+size = Vector2(16, 29)
+
+[node name="Finn" type="CharacterBody2D"]
+scale = Vector2(0.6, 0.6)
+script = ExtResource("1_b705a")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_hmlph")
+animation = &"walk"
+frame = 3
+frame_progress = 0.561906
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -1.5)
+shape = SubResource("RectangleShape2D_vm76k")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1, -1.5)
+shape = SubResource("RectangleShape2D_vm76k")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
+limit_left = 20
+limit_bottom = 650
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

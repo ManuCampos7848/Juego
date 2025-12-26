@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://ch03mbgs5x4vm"]
+
+[ext_resource type="Texture2D" uid="uid://donuu13ahu5el" path="res://Art/Personalizacion/Sombreros/SombrerosLateral/Sombrero2Lateral.png" id="1_vkpua"]
+[ext_resource type="Texture2D" uid="uid://cfqieosgxruad" path="res://Art/Personalizacion/Sombreros/SombrerosLateral/Sombrero6Lateral.png" id="2_j3b35"]
+
+[node name="SombrerosLateral" type="Node2D"]
+texture_filter = 1
+
+[node name="Sombrero2Lateral" type="Sprite2D" parent="."]
+texture = ExtResource("1_vkpua")
+
+[node name="Sombrero6Lateral" type="Sprite2D" parent="."]
+texture = ExtResource("2_j3b35")

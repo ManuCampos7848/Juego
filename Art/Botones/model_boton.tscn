@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6g6h5qua8c4u"]
+
+[ext_resource type="Texture2D" uid="uid://bqmnq520o8ji6" path="res://Art/Botones/BotonBase.png" id="1_vonqa"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_rkyfc"]
+
+[node name="ModelBoton" type="TextureButton"]
+texture_filter = 1
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(7, 7)
+texture_normal = ExtResource("1_vonqa")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 22.7143
+offset_top = 50.0
+offset_right = 144.714
+offset_bottom = 94.0
+text = "asdasda"
+label_settings = SubResource("LabelSettings_rkyfc")

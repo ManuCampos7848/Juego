@@ -1,0 +1,40 @@
+# Directorios de exportación
+android/
+ios/
+web/
+windows/
+linux/
+macos/
+
+# Archivos de exportación y binarios
+*.apk
+*.aab
+*.ipa
+*.exe
+*.pck
+*.zip
+
+# Archivos de configuración de Godot
+export_presets.cfg
+
+# Archivos generados por Godot
+*.import
+.godot/
+.godot/editor/
+.godot/exported/
+
+# Archivos temporales y de usuario
+tmp/
+user://
+
+# Directorios de dependencias
+.addons/
+addons/
+
+# Backups y temporales
+*.bak
+~*
+
+# Sistema
+.DS_Store
+Thumbs.db

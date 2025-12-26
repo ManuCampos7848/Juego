@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1kqcni26qkqh"]
+
+[ext_resource type="Texture2D" uid="uid://b6hkrq4yd4hqu" path="res://Art/Botones/BotonBaseTexto/BotonBase.png" id="1_l1vpw"]
+[ext_resource type="PackedScene" uid="uid://btr84368aycgy" path="res://Art/Botones/BotonBaseTexto/texto.tscn" id="2_t8xa8"]
+[ext_resource type="FontFile" uid="uid://owlvmdi7quj8" path="res://Art/Font/Xolonium-Regular.ttf" id="3_a2qjb"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_hcpmw"]
+font = ExtResource("3_a2qjb")
+font_size = 126
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
+
+[node name="TextureButton" type="TextureButton"]
+texture_filter = 1
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("1_l1vpw")
+
+[node name="Texto" parent="." instance=ExtResource("2_t8xa8")]
+layout_mode = 0
+offset_top = 1.0
+offset_right = 1168.0
+offset_bottom = 385.0
+scale = Vector2(0.125, 0.125)
+label_settings = SubResource("LabelSettings_hcpmw")
+horizontal_alignment = 1
+vertical_alignment = 1

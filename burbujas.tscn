@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://chbd8h0ksv6s1"]
+
+[ext_resource type="Texture2D" uid="uid://bd2biqk58w4v0" path="res://Art/TileMap/MapaCielo/Burbuja1.png" id="1_1bnak"]
+[ext_resource type="Script" uid="uid://3p24k28k2twd" path="res://Art/TileMap/MapaCielo/burbujas.gd" id="1_fvwbj"]
+[ext_resource type="Texture2D" uid="uid://dvmgqna1tk63" path="res://Art/TileMap/MapaCielo/Burbuja2.png" id="2_2pf04"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dbuvf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_1bnak")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_2pf04")
+}],
+"loop": true,
+"name": &"burbujas",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t53kk"]
+
+[node name="Burbujas" type="Area2D"]
+script = ExtResource("1_fvwbj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_dbuvf")
+animation = &"burbujas"
+frame_progress = 0.502848
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+texture_filter = 1
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_t53kk")
