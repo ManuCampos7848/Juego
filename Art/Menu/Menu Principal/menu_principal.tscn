@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://ck7idj2otqth2"]
+[gd_scene load_steps=44 format=3 uid="uid://ck7idj2otqth2"]
 
 [ext_resource type="Script" uid="uid://dregloms00b4a" path="res://Art/Menu/Menu Principal/menu_principal.gd" id="1_bq1sv"]
 [ext_resource type="Texture2D" uid="uid://d10qxpmnwhy2o" path="res://Art/Menu/Menu Principal/BtnNiveles.png" id="1_snche"]
@@ -12,21 +12,36 @@
 [ext_resource type="PackedScene" uid="uid://c52iqkeq78k7p" path="res://Art/Personalizacion/Sombreros/sombreros.tscn" id="6_a38lc"]
 [ext_resource type="Texture2D" uid="uid://b1xgso7vcl80r" path="res://Art/Personalizacion/Cabello/Cabello1.png" id="10_ru0sp"]
 [ext_resource type="Texture2D" uid="uid://d0dgie6hpfrds" path="res://Art/Personalizacion/Cabello/Cabello2.png" id="11_l1ex1"]
-[ext_resource type="Texture2D" uid="uid://se30dpdryp7i" path="res://Art/Personalizacion/Cabello/Cabello3.png" id="12_w6kxh"]
-[ext_resource type="Texture2D" uid="uid://bbw7gkv575nyw" path="res://Art/Personalizacion/Cabello/Cabello4.png" id="13_3cwcl"]
-[ext_resource type="Texture2D" uid="uid://cktmyvd6k83bj" path="res://Art/Personalizacion/Cabello/Cabello5.png" id="14_uj3jt"]
-[ext_resource type="Texture2D" uid="uid://ctey3y1smw3rw" path="res://Art/Personalizacion/Cabello/Cabello6.png" id="15_ckul6"]
+[ext_resource type="Texture2D" uid="uid://kco67ax7s31k" path="res://Art/Personalizacion/Cabello/Cabello3.png" id="12_w6kxh"]
+[ext_resource type="Texture2D" uid="uid://efu2g5vfvphp" path="res://Art/Personalizacion/Cabello/Cabello4.png" id="13_3cwcl"]
+[ext_resource type="Texture2D" uid="uid://bly3pr56vws0c" path="res://Art/Personalizacion/Cabello/Cabello5.png" id="14_uj3jt"]
+[ext_resource type="Texture2D" uid="uid://bvrmpyyupendo" path="res://Art/Personalizacion/Cabello/Cabello6.png" id="15_ckul6"]
 [ext_resource type="Texture2D" uid="uid://l5bqm3s4rjky" path="res://Art/Personalizacion/Ropa/Ropa2.png" id="16_w6kxh"]
-[ext_resource type="Texture2D" uid="uid://da8s8d2itas8v" path="res://Art/Personalizacion/Sombreros/Sombrero9.png" id="17_shreg"]
-[ext_resource type="Texture2D" uid="uid://biku4ukisggvw" path="res://Art/Personalizacion/Ropa/Ropa3.png" id="17_to5rn"]
-[ext_resource type="Texture2D" uid="uid://gw20u32xaagd" path="res://Art/Personalizacion/Sombreros/Sombreros10.png" id="18_422h3"]
+[ext_resource type="Texture2D" uid="uid://k50pniqoinsr" path="res://Art/Personalizacion/Sombreros/Sombrero9.png" id="17_shreg"]
+[ext_resource type="Texture2D" uid="uid://dd0yryyo313uc" path="res://Art/Personalizacion/Ropa/Ropa3.png" id="17_to5rn"]
+[ext_resource type="Texture2D" uid="uid://mk3538xrou2g" path="res://Art/Personalizacion/Sombreros/Sombrero10.png" id="18_422h3"]
 [ext_resource type="Texture2D" uid="uid://sftu3yufyeg7" path="res://Art/Personalizacion/Ropa/Ropa4.png" id="18_ckul6"]
 [ext_resource type="Texture2D" uid="uid://brbgw3j8e2xu6" path="res://Art/Personalizacion/Ropa/Ropa7.png" id="19_ckul6"]
 [ext_resource type="Texture2D" uid="uid://dqayfgpjv2ogt" path="res://Art/Personalizacion/Sombreros/Sombrero11.png" id="19_g822v"]
-[ext_resource type="Texture2D" uid="uid://bigvw4gxvxiq5" path="res://Art/Personalizacion/Ropa/Ropa6.png" id="20_ckul6"]
+[ext_resource type="Texture2D" uid="uid://c8omj0mxqvunp" path="res://Art/Personalizacion/Ropa/Ropa6.png" id="20_ckul6"]
 [ext_resource type="Texture2D" uid="uid://cnvkmmg1hh3sn" path="res://Art/Personalizacion/Ropa/Ropa1.png" id="20_phiyn"]
 [ext_resource type="Texture2D" uid="uid://csy61qddb1rh" path="res://Art/Personalizacion/Ropa/Patita.png" id="21_phiyn"]
+[ext_resource type="Texture2D" uid="uid://btvikwbxsd4eq" path="res://Art/Personalizacion/Sombreros/Sombrero12.png" id="22_b84qg"]
+[ext_resource type="Texture2D" uid="uid://b6q0py2q2u1vj" path="res://Art/Personalizacion/Sombreros/Sombrero13.png" id="23_ilnpq"]
+[ext_resource type="Texture2D" uid="uid://pcd4d5uuocyi" path="res://Art/Personalizacion/Sombreros/Sombrero14.png" id="24_5hwue"]
 [ext_resource type="Texture2D" uid="uid://5kvonywkuhmu" path="res://Art/Menu/Menu Principal/BtnPersonalizarPressed.png" id="24_422h3"]
+[ext_resource type="Texture2D" uid="uid://cnpfig4pial4e" path="res://Art/Personalizacion/Sombreros/Sombrero15.png" id="25_u5828"]
+[ext_resource type="Texture2D" uid="uid://36cjjmv022ip" path="res://Art/Personalizacion/Sombreros/Sombrero16.png" id="26_64nyj"]
+[ext_resource type="Texture2D" uid="uid://88qkg3rtwq7x" path="res://Art/Personalizacion/Sombreros/Sombrero17.png" id="27_vij38"]
+[ext_resource type="Texture2D" uid="uid://u5v0y3d0mdo0" path="res://Art/Personalizacion/Ropa/Ropa5.png" id="32_foluu"]
+[ext_resource type="Texture2D" uid="uid://dyny5yx0y8epx" path="res://Art/Personalizacion/Ropa/Ropa8.png" id="35_vs6y6"]
+[ext_resource type="Texture2D" uid="uid://dnd3ivwarofjv" path="res://Art/Personalizacion/Ropa/Ropa9.png" id="36_1g8au"]
+[ext_resource type="Texture2D" uid="uid://cd1makhr8d4ys" path="res://Art/Personalizacion/Ropa/Ropa10.png" id="37_lk2sv"]
+[ext_resource type="Texture2D" uid="uid://n28iwemo0ti3" path="res://Art/Personalizacion/Ropa/Ropa11.png" id="38_qj2gy"]
+[ext_resource type="Texture2D" uid="uid://0he8rpos8ljt" path="res://Art/Personalizacion/Ropa/Ropa12.png" id="39_cee26"]
+[ext_resource type="Texture2D" uid="uid://bc8ssqxxubsh4" path="res://Art/Personalizacion/Ropa/Ropa13.png" id="40_0q17d"]
+[ext_resource type="Texture2D" uid="uid://82am16wsaj8n" path="res://Art/Personalizacion/Ropa/Ropa14.png" id="41_scqrj"]
+[ext_resource type="Texture2D" uid="uid://bfj1sfeqb05cg" path="res://Art/Personalizacion/Ropa/Pantalon.png" id="42_ilnpq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pqj5o"]
 shader = ExtResource("2_njfe6")
@@ -58,161 +73,14 @@ texture = ExtResource("3_2yo5o")
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.3
 
-[node name="PlayerFront" type="Sprite2D" parent="."]
-texture_filter = 1
-position = Vector2(778, 353)
-scale = Vector2(6, 6)
-texture = ExtResource("5_bq1sv")
-
-[node name="Cabellos" type="Node2D" parent="."]
-position = Vector2(-86, 33)
-
-[node name="Cabello1" type="Sprite2D" parent="Cabellos"]
-visible = false
-texture_filter = 1
-position = Vector2(858.0002, 305)
-scale = Vector2(11.9, 12)
-texture = ExtResource("10_ru0sp")
-
-[node name="Cabello2" type="Sprite2D" parent="Cabellos"]
-texture_filter = 1
-position = Vector2(858.0002, 305)
-scale = Vector2(11.9, 12)
-texture = ExtResource("11_l1ex1")
-
-[node name="Cabello3" type="Sprite2D" parent="Cabellos"]
-visible = false
-texture_filter = 1
-position = Vector2(858.0002, 305)
-scale = Vector2(11.9, 12)
-texture = ExtResource("12_w6kxh")
-
-[node name="Cabello4" type="Sprite2D" parent="Cabellos"]
-visible = false
-texture_filter = 1
-position = Vector2(858.0002, 305)
-scale = Vector2(12, 12.101)
-texture = ExtResource("13_3cwcl")
-
-[node name="Cabello5" type="Sprite2D" parent="Cabellos"]
-visible = false
-texture_filter = 1
-position = Vector2(858.0002, 305)
-scale = Vector2(12, 12.101)
-texture = ExtResource("14_uj3jt")
-
-[node name="Cabello6" type="Sprite2D" parent="Cabellos"]
-visible = false
-texture_filter = 1
-position = Vector2(858.0002, 305)
-scale = Vector2(11.9, 12)
-texture = ExtResource("15_ckul6")
-
-[node name="Sombreros" parent="." instance=ExtResource("6_a38lc")]
-position = Vector2(778, 129)
-scale = Vector2(7, 7)
-
-[node name="Sombrero1" parent="Sombreros" index="0"]
-visible = true
-position = Vector2(-1.0000038, 28.285711)
-scale = Vector2(1.8, 1.8)
-
-[node name="Sombrero2" parent="Sombreros" index="1"]
-position = Vector2(-0.85715103, 24.999992)
-scale = Vector2(1.4, 1.4)
-
-[node name="Sombrero3" parent="Sombreros" index="2"]
-position = Vector2(-0.5714264, 24.999992)
-scale = Vector2(1.4, 1.4)
-
-[node name="Sombrero4" parent="Sombreros" index="3"]
-position = Vector2(-1, 27.571398)
-scale = Vector2(1.8, 1.5)
-
-[node name="Sombrero5" parent="Sombreros" index="4"]
-position = Vector2(-0.7142868, 26.42857)
-scale = Vector2(1.4, 1.4)
-
-[node name="Sombrero6" parent="Sombreros" index="5"]
-position = Vector2(-0.8571472, 27.57143)
-scale = Vector2(1.4, 1.4)
-
-[node name="Sombrero7" parent="Sombreros" index="6"]
-position = Vector2(-3.1428604, 27.142847)
-scale = Vector2(1.4, 1.4)
-
-[node name="Sombrero8" parent="Sombreros" index="7"]
-position = Vector2(-0.57143784, 26.28571)
-scale = Vector2(1.4, 1.4)
-
-[node name="Sombrero9" type="Sprite2D" parent="Sombreros"]
-visible = false
-texture_filter = 1
-position = Vector2(-0.7142792, 23.714281)
-scale = Vector2(1.4, 1.4)
-texture = ExtResource("17_shreg")
-
-[node name="Sombrero10" type="Sprite2D" parent="Sombreros"]
-visible = false
-texture_filter = 1
-position = Vector2(-0.7142792, 23.714281)
-scale = Vector2(1.4, 1.4)
-texture = ExtResource("18_422h3")
-
-[node name="Sombrero11" type="Sprite2D" parent="Sombreros"]
-visible = false
-texture_filter = 1
-position = Vector2(-1.3857155, 29.285675)
-scale = Vector2(1.7895088, 1.5)
-texture = ExtResource("19_g822v")
-
-[node name="Ropa" type="Node2D" parent="."]
-texture_filter = 1
-position = Vector2(783, 406)
-
-[node name="Ropa3" type="Sprite2D" parent="Ropa"]
-visible = false
-position = Vector2(-5, 16)
-scale = Vector2(12.012, 12)
-texture = ExtResource("17_to5rn")
-
-[node name="Ropa4" type="Sprite2D" parent="Ropa"]
-visible = false
-position = Vector2(-5.000061, 22.00003)
-scale = Vector2(12.012, 12)
-texture = ExtResource("18_ckul6")
-
-[node name="Ropa6" type="Sprite2D" parent="Ropa"]
-position = Vector2(-5, 76.04166)
-scale = Vector2(12.005991, 12.020826)
-texture = ExtResource("19_ckul6")
-
-[node name="Ropa2" type="Sprite2D" parent="Ropa"]
-visible = false
-position = Vector2(-5.000061, 40.00003)
-scale = Vector2(12.012, 12)
-texture = ExtResource("16_w6kxh")
-
-[node name="Ropa5" type="Sprite2D" parent="Ropa"]
-visible = false
-position = Vector2(-5.000061, 22.00003)
-scale = Vector2(11.995, 12)
-texture = ExtResource("20_ckul6")
-
-[node name="Ropa1" type="Sprite2D" parent="Ropa"]
-visible = false
-position = Vector2(-5, 16)
-scale = Vector2(12.012, 12)
-texture = ExtResource("20_phiyn")
-
 [node name="Patita" type="Sprite2D" parent="."]
-position = Vector2(754, 515)
-scale = Vector2(11.999994, 6.0000305)
+position = Vector2(829.937, 462.76)
+scale = Vector2(9.018, 4.51)
 texture = ExtResource("21_phiyn")
 
 [node name="Patita2" type="Sprite2D" parent="."]
-position = Vector2(802, 515)
-scale = Vector2(11.999994, 6.0000305)
+position = Vector2(793.982, 462.76)
+scale = Vector2(9.018, 4.51)
 texture = ExtResource("21_phiyn")
 
 [node name="TextureButton" type="TextureButton" parent="."]
@@ -269,7 +137,264 @@ offset_bottom = 526.0
 scale = Vector2(3, 3)
 texture_normal = ExtResource("4_a38lc")
 
+[node name="PlayerFront" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(812, 341.00003)
+scale = Vector2(4.495, 4.51)
+texture = ExtResource("5_bq1sv")
+
+[node name="Cabellos" type="Node2D" parent="."]
+position = Vector2(-54, -10)
+
+[node name="Cabello1" type="Sprite2D" parent="Cabellos"]
+visible = false
+texture_filter = 1
+position = Vector2(861.1749, 339.67)
+scale = Vector2(8.87, 9.03)
+texture = ExtResource("10_ru0sp")
+
+[node name="Cabello2" type="Sprite2D" parent="Cabellos"]
+visible = false
+texture_filter = 1
+position = Vector2(861.175, 339.67)
+scale = Vector2(8.955, 9.03)
+texture = ExtResource("11_l1ex1")
+
+[node name="Cabello3" type="Sprite2D" parent="Cabellos"]
+visible = false
+texture_filter = 1
+position = Vector2(861.9801, 339.99997)
+scale = Vector2(9.08, 9.146)
+texture = ExtResource("12_w6kxh")
+
+[node name="Cabello4" type="Sprite2D" parent="Cabellos"]
+visible = false
+texture_filter = 1
+position = Vector2(861.5, 333.42)
+scale = Vector2(8.928, 9.429)
+texture = ExtResource("13_3cwcl")
+
+[node name="Cabello5" type="Sprite2D" parent="Cabellos"]
+texture_filter = 1
+position = Vector2(861.56, 339)
+scale = Vector2(9.014, 9.256)
+texture = ExtResource("14_uj3jt")
+
+[node name="Cabello6" type="Sprite2D" parent="Cabellos"]
+visible = false
+texture_filter = 1
+position = Vector2(861.475, 339.83)
+scale = Vector2(9, 9.076)
+texture = ExtResource("15_ckul6")
+
+[node name="Sombreros" parent="." instance=ExtResource("6_a38lc")]
+position = Vector2(811, 182)
+scale = Vector2(5, 5)
+
+[node name="Sombrero1" parent="Sombreros" index="0"]
+position = Vector2(0.10500336, -0.20000267)
+scale = Vector2(1.8, 1.8)
+
+[node name="Sombrero2" parent="Sombreros" index="1"]
+position = Vector2(0.108, 1.1474986)
+scale = Vector2(1.795, 1.7095002)
+
+[node name="Sombrero3" parent="Sombreros" index="2"]
+position = Vector2(0.39999986, 4.5999985)
+scale = Vector2(1.9, 1.7)
+
+[node name="Sombrero4" parent="Sombreros" index="3"]
+position = Vector2(0.199998, 7.89)
+scale = Vector2(1.7894741, 1.815)
+
+[node name="Sombrero5" parent="Sombreros" index="4"]
+position = Vector2(-0.114, 2.234)
+scale = Vector2(1.4, 1.4)
+
+[node name="Sombrero6" parent="Sombreros" index="5"]
+position = Vector2(0.3429947, 10.875999)
+scale = Vector2(1.8, 1.8)
+
+[node name="Sombrero7" parent="Sombreros" index="6"]
+position = Vector2(-10.88, 11.943)
+scale = Vector2(1.4, 1.35)
+
+[node name="Sombrero8" parent="Sombreros" index="7"]
+position = Vector2(0.20004272, 1.8000011)
+scale = Vector2(1.805, 1.5)
+
+[node name="Sombrero9" type="Sprite2D" parent="Sombreros"]
+visible = false
+texture_filter = 1
+position = Vector2(0.205, 10.595)
+scale = Vector2(1.795, 1.825)
+texture = ExtResource("17_shreg")
+
+[node name="Sombrero10" type="Sprite2D" parent="Sombreros"]
+visible = false
+texture_filter = 1
+position = Vector2(0.212, 7.06)
+scale = Vector2(1.785, 1.793)
+texture = ExtResource("18_422h3")
+
+[node name="Sombrero11" type="Sprite2D" parent="Sombreros"]
+visible = false
+texture_filter = 1
+position = Vector2(0.2143631, 6.4856834)
+scale = Vector2(1.7895088, 1.5)
+texture = ExtResource("19_g822v")
+
+[node name="Sombrero12" type="Sprite2D" parent="Sombreros"]
+visible = false
+texture_filter = 1
+position = Vector2(0.504982, 2.9999866)
+scale = Vector2(1.6, 1.6)
+texture = ExtResource("22_b84qg")
+
+[node name="Sombrero13" type="Sprite2D" parent="Sombreros"]
+visible = false
+texture_filter = 1
+position = Vector2(0.30498505, -3.4000149)
+scale = Vector2(1.6, 1.6)
+texture = ExtResource("23_ilnpq")
+
+[node name="Sombrero14" type="Sprite2D" parent="Sombreros"]
+visible = false
+texture_filter = 1
+position = Vector2(0.30498505, -3.4000149)
+scale = Vector2(1.6, 1.6)
+texture = ExtResource("24_5hwue")
+
+[node name="Sombrero15" type="Sprite2D" parent="Sombreros"]
+visible = false
+texture_filter = 1
+position = Vector2(0.305, -2.95)
+scale = Vector2(1.805, 1.7)
+texture = ExtResource("25_u5828")
+
+[node name="Sombrero16" type="Sprite2D" parent="Sombreros"]
+visible = false
+texture_filter = 1
+position = Vector2(0.19998169, 5.6000004)
+scale = Vector2(1.798, 1.7)
+texture = ExtResource("26_64nyj")
+
+[node name="Sombrero17" type="Sprite2D" parent="Sombreros"]
+visible = false
+texture_filter = 1
+position = Vector2(0.2, 8.400001)
+scale = Vector2(1.795, 1.3857142)
+texture = ExtResource("27_vij38")
+
+[node name="Ropa" type="Node2D" parent="."]
+position = Vector2(15, -63)
+
+[node name="Ropa1" type="Sprite2D" parent="Ropa"]
+visible = false
+texture_filter = 1
+position = Vector2(797, 455.9795)
+scale = Vector2(9.034, 9.108)
+texture = ExtResource("20_phiyn")
+
+[node name="Ropa2" type="Sprite2D" parent="Ropa"]
+visible = false
+texture_filter = 1
+position = Vector2(796.157, 455.865)
+scale = Vector2(9.607726, 9.000007)
+texture = ExtResource("16_w6kxh")
+
+[node name="Ropa3" type="Sprite2D" parent="Ropa"]
+visible = false
+texture_filter = 1
+position = Vector2(797, 456)
+scale = Vector2(9, 9.042)
+texture = ExtResource("17_to5rn")
+
+[node name="Ropa4" type="Sprite2D" parent="Ropa"]
+visible = false
+texture_filter = 1
+position = Vector2(797, 455.89502)
+scale = Vector2(9, 9.035003)
+texture = ExtResource("18_ckul6")
+
+[node name="Ropa5" type="Sprite2D" parent="Ropa"]
+visible = false
+texture_filter = 1
+position = Vector2(797, 455.992)
+scale = Vector2(9.008, 7.732)
+texture = ExtResource("32_foluu")
+
+[node name="Ropa6" type="Sprite2D" parent="Ropa"]
+visible = false
+texture_filter = 1
+position = Vector2(797.287, 460.382)
+scale = Vector2(9.093, 9.011)
+texture = ExtResource("20_ckul6")
+
+[node name="Ropa7" type="Sprite2D" parent="Ropa"]
+visible = false
+texture_filter = 1
+position = Vector2(797, 456.00003)
+scale = Vector2(9, 9.337)
+texture = ExtResource("19_ckul6")
+
+[node name="Ropa8" type="Sprite2D" parent="Ropa"]
+visible = false
+texture_filter = 1
+position = Vector2(797, 456)
+scale = Vector2(9, 9.337)
+texture = ExtResource("35_vs6y6")
+
+[node name="Ropa9" type="Sprite2D" parent="Ropa"]
+visible = false
+texture_filter = 1
+position = Vector2(797.0375, 455.88675)
+scale = Vector2(9.082688, 9.03775)
+texture = ExtResource("36_1g8au")
+
+[node name="Ropa10" type="Sprite2D" parent="Ropa"]
+visible = false
+texture_filter = 1
+position = Vector2(797, 456)
+scale = Vector2(9, 9.07)
+texture = ExtResource("37_lk2sv")
+
+[node name="Ropa11" type="Sprite2D" parent="Ropa"]
+visible = false
+texture_filter = 1
+position = Vector2(796.51, 455.935)
+scale = Vector2(9.07, 9.07)
+texture = ExtResource("38_qj2gy")
+
+[node name="Ropa12" type="Sprite2D" parent="Ropa"]
+visible = false
+texture_filter = 1
+position = Vector2(796.51, 455.935)
+scale = Vector2(9.07, 9.07)
+texture = ExtResource("39_cee26")
+
+[node name="Ropa13" type="Sprite2D" parent="Ropa"]
+visible = false
+texture_filter = 1
+position = Vector2(797, 455.8575)
+scale = Vector2(9.03, 9.047503)
+texture = ExtResource("40_0q17d")
+
+[node name="Ropa14" type="Sprite2D" parent="Ropa"]
+visible = false
+texture_filter = 1
+position = Vector2(797, 455.792)
+scale = Vector2(9.011, 9.069333)
+texture = ExtResource("41_scqrj")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(812, 438)
+scale = Vector2(8.995, 9.001)
+texture = ExtResource("42_ilnpq")
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="TextureButton2" to="." method="_on_texture_button_2_pressed"]
+[connection signal="pressed" from="TextureButton4" to="." method="salirButton"]
 
 [editable path="Sombreros"]

@@ -1,124 +1,68 @@
+# Global.gd
 extends Node
 
+# Variables de personalización con valores por defecto
+var skin_seleccionada: int = 0
+var sombrero_seleccionado: int = -1  # -1 significa ninguno
+var cabello_seleccionado: int = -1
+var ropa_seleccionada: int = -1
 
+const SAVE_PATH = "user://personalizacion.save"
 
-# -----------------------------------------------------------
-# Variables de vida
-var vidas_persistentes = 3
-# Sistema de sombreros
-var sombrero_seleccionado = 1  # Valor por defecto: sombrero 1
-var sombreroLateralEquivalente = 1
+func _ready() -> void:
+	# Cargar automáticamente al iniciar el juego
+	cargar_datos_guardados()
 
-const RUTA_SOMBREROS_NORMALES = "res://Art/Personalizacion/Sombreros/"
-const RUTA_SOMBREROS_LATERALES = "res://Art/Personalizacion/Sombreros/SombrerosLateral/"
-
-
-#--------------------------------
-# Implementacion del sistema de sobreros combinados
-var esSombreroCombinado = false
-var numeroSombreroCombinado = 0
-#--------------------------------
-
-
-# -----------------------------------------------------------
-
-
-const SAVE_PATH = "res://game_settings.cfg"  # Cambiado a res:// para debugging
-
-
-# -----------------------------------------------------------
-func _ready():
-	load_settings()
-# -----------------------------------------------------------
-
-
-# ------------------------------------------------------------------------
-# Metodo que guarda valores en persistencia
-'''
-	Se llama este metodo cuando se pierde una vida o
-	cuando se elige un sombrero de la lista, osea, se
-	setean valores
-'''
-var listaFront = []
-var listaRigth = []
-var listaWalkD = []
-var listaWalkI = []
-func save_settings():
-	var config = ConfigFile.new()
-	config.set_value("player", "vidas", vidas_persistentes)
-	config.set_value("customization", "sombrero", sombrero_seleccionado)
-	config.set_value("customization", "sombrero_lateral", sombreroLateralEquivalente)
+func guardar_personalizacion():
+	var datos = {
+		"version": 1,
+		"skin": skin_seleccionada,
+		"sombrero": sombrero_seleccionado,
+		"cabello": cabello_seleccionado,
+		"ropa": ropa_seleccionada,
+		"fecha_guardado": Time.get_datetime_string_from_system()
+	}
 	
-	
-	#--------------------------------
-	# Nuevos datos para sombreros combinados
-	config.set_value("customization", "es_sombrero_combinado", esSombreroCombinado)
-	config.set_value("customization", "numero_sombrero_combinado", numeroSombreroCombinado)
-	#--------------------------------
-	
-	var dir = DirAccess.open("user://")
-	if not dir.dir_exists("user://config"):
-		dir.make_dir("user://config")
-	
-	var error = config.save("user://config/game_settings.cfg")
-	#--------------------------------
-	# print("Guardando - Combinado: ", esSombreroCombinado, " | Número: ", numeroSombreroCombinado)
-	#--------------------------------
-	
-	config.set_value("textures", "front", _save_texture_array(listaFront))
-	config.set_value("textures", "right", _save_texture_array(listaRigth))
-	config.set_value("textures", "walkD", _save_texture_array(listaWalkD))
-	config.set_value("textures", "walkI", _save_texture_array(listaWalkI))
-	return error
-# ------------------------------------------------------------------------
-
-
-# ------------------------------------------------------------------------
-# Metodo que carga los datos de la persistencia
-'''
-	Cada que se reinicia el mundo (porque perdio el player),
-	se llama este metodo para ver cuantas vidas le quedan y
-	que sombrero fue el que escogio
-'''
-func load_settings():
-	var config = ConfigFile.new()
-	var err = config.load(SAVE_PATH)
-	if err == OK:
-		vidas_persistentes = config.get_value("player", "vidas", 5)
-		sombrero_seleccionado = config.get_value("customization", "sombrero", 1)
-		sombreroLateralEquivalente = config.get_value("customization", "sombrero_lateral", 1)
-		
-		#--------------------------------
-		# Nuevos datos para sombreros combinados
-		esSombreroCombinado = config.get_value("customization", "es_sombrero_combinado", false)
-		numeroSombreroCombinado = config.get_value("customization", "numero_sombrero_combinado", 0)
-		
-		#--------------------------------
-		
-		listaFront = _load_texture_array(config.get_value("textures", "front", []))
-		listaRigth = _load_texture_array(config.get_value("textures", "right", []))
-		listaWalkD = _load_texture_array(config.get_value("textures", "walkD", []))
-		listaWalkI = _load_texture_array(config.get_value("textures", "walkI", []))
-
+	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
+	if file:
+		file.store_var(datos)
+		file.close()
+		print("✅ Personalización guardada en disco")
+		print("   Skin: ", skin_seleccionada)
+		print("   Cabello: ", cabello_seleccionado)
+		print("   Sombrero: ", sombrero_seleccionado)
+		print("   Ropa: ", ropa_seleccionada)
 	else:
-		printerr("Error al cargar configuración: ", err)
-	print("Cargando - Combinado: ", esSombreroCombinado, " | Número: ", numeroSombreroCombinado)
-# ------------------------------------------------------------------------
+		print("❌ Error al guardar: ", FileAccess.get_open_error())
 
-func _save_texture_array(texture_array: Array) -> Array:
-	var paths = []
-	for texture in texture_array:
-		if texture != null:
-			paths.append(texture.resource_path)
+func cargar_datos_guardados():
+	if FileAccess.file_exists(SAVE_PATH):
+		var file = FileAccess.open(SAVE_PATH, FileAccess.READ)
+		if file:
+			var datos = file.get_var()
+			file.close()
+			
+			if datos is Dictionary:
+				skin_seleccionada = datos.get("skin", 0)
+				sombrero_seleccionado = datos.get("sombrero", -1)
+				cabello_seleccionado = datos.get("cabello", -1)
+				ropa_seleccionada = datos.get("ropa", -1)
+				print("📂 Datos de personalización cargados")
+				print("   Skin: ", skin_seleccionada)
+				print("   Cabello: ", cabello_seleccionado)
+				print("   Sombrero: ", sombrero_seleccionado)
+				print("   Ropa: ", ropa_seleccionada)
+			else:
+				print("⚠️ Formato de datos inválido")
 		else:
-			paths.append("")
-	return paths
+			print("❌ Error al abrir archivo de guardado")
+	else:
+		print("📝 No hay datos guardados, usando valores por defecto")
 
-func _load_texture_array(path_array: Array) -> Array:
-	var textures = []
-	for path in path_array:
-		if path != "":
-			textures.append(load(path))
-		else:
-			textures.append(null)
-	return textures
+# Función para resetear a valores por defecto (opcional)
+func resetear_personalizacion():
+	skin_seleccionada = 0
+	sombrero_seleccionado = -1
+	cabello_seleccionado = -1
+	ropa_seleccionada = -1
+	guardar_personalizacion()

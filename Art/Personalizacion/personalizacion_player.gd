@@ -2,42 +2,84 @@ extends Control
 
 @onready var recuadro = $Recuadro
 @onready var cabellos = $Cabellos
-	
-@onready var sombreros =$Sombreros 
+@onready var sombreros =$Sombreros
+@onready var ropa = $Ropa
 
+
+
+# ___________________________ FADE IN/OUT ________________________________________________________
 var fade_timer := 0.0
 var fade_completed := false
 var fade_duration := 1
 var fade_out_in_progress := false
+var target_scene_path: String = ""
+var is_changing_scene: bool = false
 
 @onready var fade_overlay = ColorRect.new()
 
 func fade_in(delta):
-	if not fade_out_in_progress:
+	if not fade_out_in_progress and not is_changing_scene:
 		if fade_timer < fade_duration:
 			fade_timer += delta
 			fade_overlay.color.a = 1.0 - (fade_timer / fade_duration)
 		if fade_timer >= fade_duration:
 			fade_completed = true
 			fade_overlay.hide()
+			
+# Añade esta función para iniciar el cambio de escena
+func start_scene_change(scene_path: String) -> void:
+	if is_changing_scene:
+		return  # Evitar múltiples cambios
+	
+	is_changing_scene = true
+	target_scene_path = scene_path
+	fade_out_in_progress = true
+	fade_completed = false
+	fade_timer = 0.0
+	fade_overlay.show()
+	fade_overlay.color.a = 0.0
 
 func _process(delta: float) -> void:
-	fade_in(delta)
+	if fade_out_in_progress and is_changing_scene:
+		# Fade out
+		fade_timer += delta
+		var progress = fade_timer / fade_duration
+		fade_overlay.color.a = min(progress, 1.0)
+		
+		if fade_timer >= fade_duration:
+			# Cambiar escena cuando el fade termine
+			complete_scene_change()
+	else:
+		# Fade in normal
+		fade_in(delta)
+
+# Añade esta función para completar el cambio de escena
+func complete_scene_change() -> void:
+	if target_scene_path != "":
+		get_tree().change_scene_to_file(target_scene_path)
 	
+	# Resetear variables (por si acaso)
+	fade_out_in_progress = false
+	is_changing_scene = false
+	target_scene_path = ""
+	fade_timer = 0.0
+
+# ________________________________________________________________________________________________
 func _ready() -> void:
 	$Timer.start()
 	seccionColores()
+	seccionIndicesSeleccion()
+	seccionSombrerosIndices()
+	seccionPeinadosIndices()
+	seccionRopaIndices()
 	
 	fade_overlay.color = Color.BLACK
 	fade_overlay.size = get_viewport().get_visible_rect().size
 	add_child(fade_overlay)
 	
-		# Cargar la personalización guardada
-	var indice_cargado = Global.sombrero_seleccionado
-	if indice_cargado < listaFront.size():  # Verificar que el índice sea válido
-		aplicar_personalizacion(indice_cargado)
 	
-
+	
+# _________________ ANIMACIONES CAMBIO DE ACCESORIO (INDICES) ____________________________________
 func cabelloAelatorio():
 	# Ocultar todos los cabellos
 	for i in range(1, 7):  # Cambié a 7 si tienes 6 cabellos
@@ -53,25 +95,45 @@ func cabelloAelatorio():
 		cabelloElegido.show()
 		#print("Mostrando: Cabello" + str(num))
 	
+func ropaAleatoria():
+	# Ocultar todos los cabellos
+	for i in range(1, 15):  # Cambié a 7 si tienes 6 cabellos
+		var ropa_nodo = ropa.get_node("Ropa" + str(i))  # Nombre diferente
+		if ropa_nodo:
+			ropa_nodo.hide()
+	
+	# Mostrar un cabello aleatorio
+	var num : int = randi_range(1, 14)
+	var ropaElegida = ropa.get_node("Ropa" + str(num))  # 'cabello' sigue siendo el contenedor
+	
+	if ropaElegida:
+		ropaElegida.show()
+		#print("Mostrando: Cabello" + str(num))
+		
+		
 func _on_timer_timeout() -> void:
-	#sombrerosAleatorios()
+	sombrerosAleatorios()
 	#skinColorPersonajeAleatorio()
 	cabelloAelatorio()
-	#ropaAleatoria()
-	pass	
+	ropaAleatoria()
+	pass
 
 func sombrerosAleatorios():
 		# Primero ocultar todos los sombreros
-	for i in range(1, 11):
+	for i in range(1, 17):
 		var sombrero = sombreros.get_node("Sombrero" + str(i))
 		if sombrero:
 			sombrero.hide()
-	$Sombreros/Sombrero11.hide()
+	$Sombreros/Sombrero17.hide()
 	# Seleccionar y mostrar un sombrero aleatorio
-	var num : int = randi_range(1, 11)  # Usa randi_range para enteros
+	var num : int = randi_range(1, 17)  # Usa randi_range para enteros
 	var sombreroElegido = sombreros.get_node("Sombrero" + str(num))
 	if sombreroElegido:
 		sombreroElegido.show()
+# ________________________________________________________________________________________________		
+
+
+
 # __________________________________  Codigo seleccion de colores __________________________
 # Listas de recursos
 var listaFront = []       # Vistas frontales
@@ -82,8 +144,54 @@ var listaWalkI = []       # Pasos izquierda
 var indiceActual = 0      # Índice actual de personalización
 var is_moving = false     # Para controlar si el personaje se está moviendo
 
-var formas_por_indice: Dictionary
 
+
+# ____________ ACTIVAR COLISION DE ACCESORIOS Y COLORES __________________________________________
+var sombrerosPorIndice: Dictionary
+var formas_por_indice: Dictionary
+var indiceEleccion: Dictionary
+var peinadosPorIndice: Dictionary
+var ropaPorIndice: Dictionary
+
+
+func seccionRopaIndices():
+	ropaPorIndice = {}
+	var idx = 0
+	var shapes = $SkinRopa.get_children()
+	for child in shapes:
+		if child is CollisionShape2D:
+			ropaPorIndice[idx] = child
+			idx += 1
+			
+			
+func seccionPeinadosIndices():
+	peinadosPorIndice = {}
+	var idx = 0
+	var shapes = $SkinPeinados.get_children()
+	for child in shapes:
+		if child is CollisionShape2D:
+			peinadosPorIndice[idx] = child
+			idx += 1
+			
+			
+func seccionSombrerosIndices():
+	sombrerosPorIndice = {}
+	var idx = 0
+	var shapes = $SkinSombreros.get_children()
+	for child in shapes:
+		if child is CollisionShape2D:
+			sombrerosPorIndice[idx] = child
+			idx += 1
+
+func seccionIndicesSeleccion():
+	indiceEleccion = {}
+	var idx = 0
+	var shapes = $IndiceEleccion.get_children()
+	for child in shapes:
+		if child is CollisionShape2D:
+			indiceEleccion[idx] = child
+			idx += 1
+	
 func seccionColores():
 		# Codigo seccion colores
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -104,7 +212,80 @@ func seccionColores():
 	$PlayerFront.visible = true
 	$PlayerWalk.visible = false
 	$PlayerWalk.stop()  # Asegurarse que la animación no está corriendo
+	
+func esconderElecciones():
+	recuadro.global_position = Vector2(185,197)
+	var skinCabellos = $SkinSombreros.get_children()
+	for skinCabello in skinCabellos:
+		if skinCabello is CollisionShape2D:
+			skinCabello.disabled = true
+		skinCabello.hide()
+		
+	
+	var colorSkins = $ColorSkins.get_children()
+	for coloresDeSkin in colorSkins:
+		if coloresDeSkin is CollisionShape2D:
+			coloresDeSkin.disabled = true
+		coloresDeSkin.hide()
+	
+	var skinsPeinados = $SkinPeinados.get_children()
+	for skinPeinado in skinsPeinados:
+		if skinPeinado is CollisionShape2D:
+			skinPeinado.disabled = true
+		skinPeinado.hide()
+	
+	var skinRopas = $SkinRopa.get_children()
+	for skinRopa in skinRopas:
+		if skinRopa is CollisionShape2D:
+			skinRopa.disabled = true
+		skinRopa.hide()
+	
+	var elecciones = $Elecciones.get_children()
+	for eleccion in elecciones:
+		eleccion.hide()
+# ________________________________________________________________________________________________	
 
+# Puedes crear una función para reutilizar este código
+func habilitar_hijos_de(nodo: Node, habilitar: bool = true) -> void:
+	for child in nodo.get_children():
+		if child.has_method("set_disabled"):
+			child.disabled = !habilitar
+		# También puedes manejar otros tipos de nodos
+		if child is CanvasItem:
+			child.visible = habilitar
+			
+# ________________ FUNCIONES CON EL CLICK IZQUIERDO (SELECCION DE ACCESORIOS) ____________________
+func _on_indice_eleccion_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		if indiceEleccion.has(shape_idx):
+			var shape = indiceEleccion[shape_idx]
+			print("Clic sobre:", shape.name)
+			match shape.name:
+				"ColoresIndice":
+					esconderElecciones()
+					$ColorSkins.show()
+					habilitar_hijos_de($ColorSkins)
+					$Elecciones/Eleccion1.show()
+				"CabellosIndice":
+					esconderElecciones()
+					$SkinPeinados.show()
+					habilitar_hijos_de($SkinPeinados)
+					$Elecciones/Eleccion2.show()
+				"SombrerosIndice":
+					esconderElecciones()
+					$SkinSombreros.show()
+					habilitar_hijos_de($SkinSombreros)
+					$Elecciones/Eleccion3.show()
+				"RopaIndice":
+					esconderElecciones()
+					$SkinRopa.show()
+					habilitar_hijos_de($SkinRopa)
+					$Elecciones/Eleccion4.show()
+				"PantalonesIndice":
+					esconderElecciones()
+					$Elecciones/Eleccion5.show()
+					
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		if formas_por_indice.has(shape_idx):
@@ -206,6 +387,8 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 					aplicar_personalizacion(44)
 				"Sprite46":
 					aplicar_personalizacion(45)
+# ________________________________________________________________________________________________	
+
 
 func _on_btn_derecha_pressed() -> void:
 	
@@ -218,16 +401,21 @@ func _on_btn_derecha_pressed() -> void:
 
 func _on_btn_izquierda_pressed() -> void:
 	
-	$PlayerFront.visible = false
-	$PlayerWalk.visible = true
+	start_scene_change("res://Art/Menu/Menu Principal/menu_principal.tscn")
 	
-	$PlayerWalk.flip_h = true
-	$PlayerWalk.play("walk")
+	#$PlayerFront.visible = false
+	#$PlayerWalk.visible = true
+	
+	#$PlayerWalk.flip_h = true
+	#$PlayerWalk.play("walk")
 	pass # Replace with function body.
 
 func _on_btn_front_pressed() -> void:
 	$PlayerWalk.visible = false
 	$PlayerFront.visible = true
+
+
+
 
 func cargar_imagenes():
 	# Cargamos todas las variantes (1-45)
@@ -271,9 +459,6 @@ var texturaWalkI
 var ultimo_indice_seleccionado = 0
 
 func aplicar_personalizacion(indice: int):
-	
-	#print(listaFront[indice].position)
-	# Aplicar al Sprite frontal
 	if indice < listaFront.size() and listaFront[indice] != null:
 		$PlayerFront.texture = listaFront[indice]
 	
@@ -282,38 +467,146 @@ func aplicar_personalizacion(indice: int):
 		var frames = SpriteFrames.new()
 		frames.add_animation("walk")
 		frames.add_frame("walk", listaRigth[indice])
-		print("Frame 1 (Right): ", listaRigth[indice].resource_path if listaRigth[indice] else "null")
-
 		frames.add_frame("walk", listaWalkD[indice])
-		print("Frame 2 (WalkD): ", listaWalkD[indice].resource_path if listaWalkD[indice] else "null")
-
 		frames.add_frame("walk", listaRigth[indice])
-		print("Frame 3 (Right): ", listaRigth[indice].resource_path if listaRigth[indice] else "null")
-
 		frames.add_frame("walk", listaWalkI[indice])
-		print("Frame 4 (WalkI): ", listaWalkI[indice].resource_path if listaWalkI[indice] else "null")
-
 		$PlayerWalk.sprite_frames = frames
 		$PlayerWalk.play("walk")
+	
 	ultimo_indice_seleccionado = indice
-	guardar_persistencia_frames()
+	Global.skin_seleccionada = indice  # GUARDAR EN GLOBAL
+	print("Skin guardada: ", indice)
+	
 
 
-func guardar_persistencia_frames():
-	# Usamos el sistema existente de Global para guardar solo el índice
-	Global.sombrero_seleccionado = ultimo_indice_seleccionado
-	Global.save_settings()
 # ___________________________________________________________________________________________
+
+
 func _on_Iniciar_pressed():
-	Global.save_settings()
 	get_tree().change_scene_to_file("res://mundo.tscn")
 
 
-func _on_eleccion_carpeta_body_exited(body: Node2D) -> void:
+func _on_skin_cabellos_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		if peinadosPorIndice.has(shape_idx):
+			var shape = peinadosPorIndice[shape_idx]
+			
+			recuadro.global_position = shape.global_position
+			match shape.name:
+				"Sprite1":
+					cambiarPeinado($CabellosInPlayer/Cabello1)
+				"Sprite2":
+					cambiarPeinado($CabellosInPlayer/Cabello2)
+				"Sprite3":
+					cambiarPeinado($CabellosInPlayer/Cabello3)
+				"Sprite4":
+					cambiarPeinado($CabellosInPlayer/Cabello4)
+				"Sprite5":
+					cambiarPeinado($CabellosInPlayer/Cabello5)
+				"Sprite6":
+					cambiarPeinado($CabellosInPlayer/Cabello6)
+				_:
+					for cabello in $CabellosInPlayer.get_children():
+						cabello.hide()
+					
+
+func _on_skin_sombreros_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		if sombrerosPorIndice.has(shape_idx):
+			var shape = sombrerosPorIndice[shape_idx]
+			recuadro.global_position = shape.global_position
+			match shape.name:
+				"Sprite1":
+					cambiarSombrero($SombrerosInPlayer/Sombrero1)
+				"Sprite2":
+					cambiarSombrero($SombrerosInPlayer/Sombrero2)
+				"Sprite3":
+					cambiarSombrero($SombrerosInPlayer/Sombrero3)
+				"Sprite4":
+					cambiarSombrero($SombrerosInPlayer/Sombrero4)
+				"Sprite5":
+					cambiarSombrero($SombrerosInPlayer/Sombrero5)
+				"Sprite6":
+					cambiarSombrero($SombrerosInPlayer/Sombrero6)
+				"Sprite7":
+					cambiarSombrero($SombrerosInPlayer/Sombrero7)
+				"Sprite8":
+					cambiarSombrero($SombrerosInPlayer/Sombrero8)
+				"Sprite9":
+					cambiarSombrero($SombrerosInPlayer/Sombrero9)
+				"Sprite10":
+					cambiarSombrero($SombrerosInPlayer/Sombrero10)
+				"Sprite11":
+					cambiarSombrero($SombrerosInPlayer/Sombrero11)
+				"Sprite12":
+					cambiarSombrero($SombrerosInPlayer/Sombrero12)
+				"Sprite13":
+					cambiarSombrero($SombrerosInPlayer/Sombrero13)
+				"Sprite14":
+					cambiarSombrero($SombrerosInPlayer/Sombrero14)
+				"Sprite15":
+					cambiarSombrero($SombrerosInPlayer/Sombrero15)
+				"Sprite16":
+					cambiarSombrero($SombrerosInPlayer/Sombrero16)
+				"Sprite17":
+					cambiarSombrero($SombrerosInPlayer/Sombrero17)
+				_:
+					for sombrero in $SombrerosInPlayer.get_children():
+						sombrero.hide()
+
+func _on_skin_ropa_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		if ropaPorIndice.has(shape_idx):
+			var shape = ropaPorIndice[shape_idx]
+			recuadro.global_position = shape.global_position
+			match shape.name:
+				"Sprite1":
+					cambiarRopa($RopaInPlayer/Ropa1)
+				"Sprite2":
+					cambiarRopa($RopaInPlayer/Ropa2)
+				"Sprite3":
+					cambiarRopa($RopaInPlayer/Ropa3)
+				"Sprite4":
+					cambiarRopa($RopaInPlayer/Ropa4)
+				"Sprite5":
+					cambiarRopa($RopaInPlayer/Ropa5)
+				"Sprite6":
+					cambiarRopa($RopaInPlayer/Ropa6)
+				"Sprite7":
+					cambiarRopa($RopaInPlayer/Ropa7)
+				"Sprite8":
+					cambiarRopa($RopaInPlayer/Ropa8)
+				"Sprite9":
+					cambiarRopa($RopaInPlayer/Ropa9)
+				"Sprite10":
+					cambiarRopa($RopaInPlayer/Ropa10)
+				"Sprite11":
+					cambiarRopa($RopaInPlayer/Ropa11)
+				"Sprite12":
+					cambiarRopa($RopaInPlayer/Ropa12)
+				"Sprite13":
+					cambiarRopa($RopaInPlayer/Ropa13)
+				"Sprite14":
+					cambiarRopa($RopaInPlayer/Ropa14)
+				_:
+					for ropaInPlayer in $RopaInPlayer.get_children():
+						ropaInPlayer.hide()
+				
+
+func cambiarPeinado(cabelloElegido):
+	for cabello in $CabellosInPlayer.get_children():
+		cabello.hide()
+	cabelloElegido.show()
 	
-	match body.name:
-		"Colores":
-			print("Carolo1")
-		"Peinados":
-			print("Carolo2")
-	pass # Replace with function body.
+
+func cambiarSombrero(sombreroElegido):
+	for sombrero in $SombrerosInPlayer.get_children():
+		sombrero.hide()
+	sombreroElegido.show()
+
+func cambiarRopa(ropaElegida):
+	for ropaInPlayer in $RopaInPlayer.get_children():
+		ropaInPlayer.hide()
+	ropaElegida.show()
+	
+   
