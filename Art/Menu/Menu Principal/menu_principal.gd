@@ -81,23 +81,89 @@ func _ready() -> void:
 	fade_overlay.show()
 	fade_overlay.color.a = 1.0
 	
-	await get_tree().create_timer(1).timeout
-	$Timer.start()
+	# Intentar cargar personalización guardada
+	if cargar_personalizacion_guardada():
+		print("Personalización cargada desde archivo")
+		if Global.cabello == "":
+			$Cabellos/Cabello5.hide()
+	else:
+		# Si no hay archivo, iniciar timer aleatorio
+		print("No hay datos guardados, iniciando aleatorio...")
+		await get_tree().create_timer(1).timeout
+		$Timer.start()
+		
+		
+func cargar_personalizacion_guardada() -> bool:
+	if not Global.cargar_personalizacion():
+	
+		return false
+	# Cargar skin del personaje
+	if Global.skin != "":
+		var ruta = "res://Art/Personalizacion/Front/Front" + Global.skin + ".png"
+		var texture = load(ruta)
+		if texture:
+			player.texture = texture
+			print("Skin cargada:", Global.skin)
+	
+	# Cargar cabello
+	if Global.cabello != "":
+		for i in range(1, 7):
+			var cabello_nodo = cabellos.get_node("Cabello" + str(i))
+			if cabello_nodo:
+				cabello_nodo.hide()
+		
+		var cabello_nombre = "Cabello" + Global.cabello
+		var cabello_guardado = cabellos.get_node(cabello_nombre)
+		if cabello_guardado:
+			cabello_guardado.show()
+			print("Cabello cargado:", cabello_nombre)
+	
+	# Cargar sombrero
+	if Global.sombrero != "":
+		for i in range(1, 18):
+			var sombrero_nodo = sombreros.get_node("Sombrero" + str(i))
+			if sombrero_nodo:
+				sombrero_nodo.hide()
+		
+		var sombrero_nombre = "Sombrero" + Global.sombrero
+		var sombrero_guardado = sombreros.get_node(sombrero_nombre)
+		if sombrero_guardado:
+			sombrero_guardado.show()
+			print("Sombrero cargado:", sombrero_nombre)
+	
+	# Cargar ropa
+	if Global.ropa != "":
+		for i in range(1, 15):
+			var ropa_nodo = ropa.get_node("Ropa" + str(i))
+			if ropa_nodo:
+				ropa_nodo.hide()
+		
+		var ropa_nombre = "Ropa" + Global.ropa
+		var ropa_guardada = ropa.get_node(ropa_nombre)
+		if ropa_guardada:
+			ropa_guardada.show()
+			print("Ropa cargada:", ropa_nombre)
+	
+	return true
+
+
 
 func sombrerosAleatorios():
 	# Primero ocultar todos los sombreros
-	for i in range(1, 11):
+	for i in range(1, 18):
 		var sombrero = sombreros.get_node("Sombrero" + str(i))
 		if sombrero:
 			sombrero.hide()
 	$Sombreros/Sombrero11.hide()
 	# Seleccionar y mostrar un sombrero aleatorio
-	var num : int = randi_range(1, 11)
+	var num : int = randi_range(1, 17)
 	var sombreroElegido = sombreros.get_node("Sombrero" + str(num))
 	if sombreroElegido:
 		sombreroElegido.show()
 
 func skinColorPersonajeAleatorio():
+	
+	# Código original...
 	var num = randi_range(1, 45)
 	var ruta = "res://Art/Personalizacion/Front/Front" + str(num) + ".png"
 	
@@ -109,29 +175,32 @@ func skinColorPersonajeAleatorio():
 		player.texture = preload("res://Art/Personalizacion/Front/Front1.png")
 
 func cabelloAelatorio():
-	for i in range(1, 6):
+
+	# Código original...
+	for i in range(1, 7):
 		var cabello_nodo = cabellos.get_node("Cabello" + str(i))
 		if cabello_nodo:
 			cabello_nodo.hide()
 	
-	var num : int = randi_range(1, 5)
+	var num : int = randi_range(1, 6)
 	var cabelloElegido = cabellos.get_node("Cabello" + str(num))
 	
 	if cabelloElegido:
 		cabelloElegido.show()
 
 func ropaAleatoria():
-	for i in range(1, 6):
+	# Código original...
+	for i in range(1, 15):
 		var ropa_nodo = ropa.get_node("Ropa" + str(i))
 		if ropa_nodo:
 			ropa_nodo.hide()
 	
-	var num : int = randi_range(1, 5)
+	var num : int = randi_range(1, 14)
 	var ropaElegida = ropa.get_node("Ropa" + str(num))
 	
 	if ropaElegida:
 		ropaElegida.show()
-		print("Mostrando: ropa" + str(num))
+		print("Mostrando: Ropa" + str(num))
 		
 func _on_timer_timeout() -> void:
 	sombrerosAleatorios()

@@ -1,68 +1,43 @@
-# Global.gd
 extends Node
 
-# Variables de personalización con valores por defecto
-var skin_seleccionada: int = 0
-var sombrero_seleccionado: int = -1  # -1 significa ninguno
-var cabello_seleccionado: int = -1
-var ropa_seleccionada: int = -1
+# Variables de personalización
+var skin: String = ""
+var cabello: String = ""
+var sombrero: String = ""
+var ropa: String = ""
 
-const SAVE_PATH = "user://personalizacion.save"
-
-func _ready() -> void:
-	# Cargar automáticamente al iniciar el juego
-	cargar_datos_guardados()
+# Ruta del archivo de guardado
+const SAVE_PATH = "user://personalizacion_save.json"
 
 func guardar_personalizacion():
 	var datos = {
-		"version": 1,
-		"skin": skin_seleccionada,
-		"sombrero": sombrero_seleccionado,
-		"cabello": cabello_seleccionado,
-		"ropa": ropa_seleccionada,
-		"fecha_guardado": Time.get_datetime_string_from_system()
+		"skin": skin,
+		"cabello": cabello,
+		"sombrero": sombrero,
+		"ropa": ropa
 	}
 	
 	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	if file:
-		file.store_var(datos)
+		file.store_string(JSON.stringify(datos))
 		file.close()
-		print("✅ Personalización guardada en disco")
-		print("   Skin: ", skin_seleccionada)
-		print("   Cabello: ", cabello_seleccionado)
-		print("   Sombrero: ", sombrero_seleccionado)
-		print("   Ropa: ", ropa_seleccionada)
+		print("Datos guardados en:", SAVE_PATH)
 	else:
-		print("❌ Error al guardar: ", FileAccess.get_open_error())
+		print("Error al guardar")
 
-func cargar_datos_guardados():
-	if FileAccess.file_exists(SAVE_PATH):
-		var file = FileAccess.open(SAVE_PATH, FileAccess.READ)
-		if file:
-			var datos = file.get_var()
-			file.close()
-			
-			if datos is Dictionary:
-				skin_seleccionada = datos.get("skin", 0)
-				sombrero_seleccionado = datos.get("sombrero", -1)
-				cabello_seleccionado = datos.get("cabello", -1)
-				ropa_seleccionada = datos.get("ropa", -1)
-				print("📂 Datos de personalización cargados")
-				print("   Skin: ", skin_seleccionada)
-				print("   Cabello: ", cabello_seleccionado)
-				print("   Sombrero: ", sombrero_seleccionado)
-				print("   Ropa: ", ropa_seleccionada)
-			else:
-				print("⚠️ Formato de datos inválido")
-		else:
-			print("❌ Error al abrir archivo de guardado")
-	else:
-		print("📝 No hay datos guardados, usando valores por defecto")
-
-# Función para resetear a valores por defecto (opcional)
-func resetear_personalizacion():
-	skin_seleccionada = 0
-	sombrero_seleccionado = -1
-	cabello_seleccionado = -1
-	ropa_seleccionada = -1
-	guardar_personalizacion()
+func cargar_personalizacion():
+	var file = FileAccess.open(SAVE_PATH, FileAccess.READ)
+	if file:
+		var contenido = file.get_as_text()
+		var datos = JSON.parse_string(contenido)
+		file.close()
+		
+		if datos:
+			skin = datos.get("skin", "")
+			cabello = datos.get("cabello", "")
+			sombrero = datos.get("sombrero", "")
+			ropa = datos.get("ropa", "")
+			print("Datos cargados desde archivo")
+			return true
+	print("No hay datos guardados")
+	return false

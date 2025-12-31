@@ -4,7 +4,23 @@ extends Control
 @onready var cabellos = $Cabellos
 @onready var sombreros =$Sombreros
 @onready var ropa = $Ropa
+@onready var player = $PlayerFront
 
+
+# __________________________ Recuadro _________________________________________
+var blink_timer := 0.0
+@export var blink_speed := 8.0  # Más rápido que el anterior (4 ciclos por segundo)
+var is_blinking := true
+# __________________________ Cargados en Persistencia _________________________
+@onready var sombrerosCargadosPersistencia  = $SombrerosInPlayer 
+@onready var cabellosCargadosPersistencia = $CabellosInPlayer
+@onready var ropaCargadosPersistencia = $RopaInPlayer
+
+# __________________________ Variables para guardar en Persistencia _________________________
+var colorElegidoPersistencia : String = ""
+var cabelloElegidoPersistencia : String = ""
+var sombreroElegidoPersistencia : String = ""
+var ropaElegidaPersistencia : String = ""
 
 
 # ___________________________ FADE IN/OUT ________________________________________________________
@@ -40,6 +56,11 @@ func start_scene_change(scene_path: String) -> void:
 	fade_overlay.color.a = 0.0
 
 func _process(delta: float) -> void:
+
+	if is_blinking:
+		blink_timer += delta
+		recuadro.modulate.a = 1.0 if fmod(blink_timer, 0.3) < 0.2 else 0.0
+		
 	if fade_out_in_progress and is_changing_scene:
 		# Fade out
 		fade_timer += delta
@@ -77,7 +98,9 @@ func _ready() -> void:
 	fade_overlay.size = get_viewport().get_visible_rect().size
 	add_child(fade_overlay)
 	
-	
+	if cargar_personalizacion_guardada():
+		cargar_personalizacion_guardada()
+		print("Personalización cargada desde archivo")
 	
 # _________________ ANIMACIONES CAMBIO DE ACCESORIO (INDICES) ____________________________________
 func cabelloAelatorio():
@@ -93,7 +116,6 @@ func cabelloAelatorio():
 	
 	if cabelloElegido:
 		cabelloElegido.show()
-		#print("Mostrando: Cabello" + str(num))
 	
 func ropaAleatoria():
 	# Ocultar todos los cabellos
@@ -108,7 +130,6 @@ func ropaAleatoria():
 	
 	if ropaElegida:
 		ropaElegida.show()
-		#print("Mostrando: Cabello" + str(num))
 		
 		
 func _on_timer_timeout() -> void:
@@ -137,9 +158,7 @@ func sombrerosAleatorios():
 # __________________________________  Codigo seleccion de colores __________________________
 # Listas de recursos
 var listaFront = []       # Vistas frontales
-var listaRigth = []       # Vistas derecha (para animación)
-var listaWalkD = []       # Pasos derecha
-var listaWalkI = []       # Pasos izquierda
+
 
 var indiceActual = 0      # Índice actual de personalización
 var is_moving = false     # Para controlar si el personaje se está moviendo
@@ -291,6 +310,7 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 		if formas_por_indice.has(shape_idx):
 			var shape = formas_por_indice[shape_idx]
 			print("Clic sobre:", shape.name)
+			colorElegidoPersistencia = shape.name
 			print(shape.position)
 			recuadro.global_position = shape.global_position
 			match shape.name:
@@ -428,54 +448,18 @@ func cargar_imagenes():
 			listaFront.append(null)
 			print("Advertencia: No se encontró ", pathFront)
 		
-		# Cargar vista derecha (para animación)
-		var pathRigth = "res://Art/Personalizacion/Rigth/Rigth%d.png" % i
-		if ResourceLoader.exists(pathRigth):
-			listaRigth.append(load(pathRigth))
-		else:
-			listaRigth.append(null)
-			print("Advertencia: No se encontró ", pathRigth)
 		
-		# Cargar pasos derecha
-		var pathWalkD = "res://Art/Personalizacion/WalkDerecha/WalkD%d.png" % i
-		if ResourceLoader.exists(pathWalkD):
-			listaWalkD.append(load(pathWalkD))
-		else:
-			listaWalkD.append(null)
-			print("Advertencia: No se encontró ", pathWalkD)
-		
-		# Cargar pasos izquierda
-		var pathWalkI = "res://Art/Personalizacion/WalkIzquierda/WalkI%d.png" % i
-		if ResourceLoader.exists(pathWalkI):
-			listaWalkI.append(load(pathWalkI))
-		else:
-			listaWalkI.append(null)
-			print("Advertencia: No se encontró ", pathWalkI)
 
 
 var texturaFront
-var texturaWalkD
-var texturaWalkI
 var ultimo_indice_seleccionado = 0
 
 func aplicar_personalizacion(indice: int):
 	if indice < listaFront.size() and listaFront[indice] != null:
 		$PlayerFront.texture = listaFront[indice]
 	
-	# Configurar la animación walk del AnimatedSprite
-	if indice < listaRigth.size() and listaRigth[indice] != null:
-		var frames = SpriteFrames.new()
-		frames.add_animation("walk")
-		frames.add_frame("walk", listaRigth[indice])
-		frames.add_frame("walk", listaWalkD[indice])
-		frames.add_frame("walk", listaRigth[indice])
-		frames.add_frame("walk", listaWalkI[indice])
-		$PlayerWalk.sprite_frames = frames
-		$PlayerWalk.play("walk")
-	
 	ultimo_indice_seleccionado = indice
-	Global.skin_seleccionada = indice  # GUARDAR EN GLOBAL
-	print("Skin guardada: ", indice)
+	print("Skin guardada: ", colorElegidoPersistencia)
 	
 
 
@@ -490,7 +474,7 @@ func _on_skin_cabellos_input_event(viewport: Node, event: InputEvent, shape_idx:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		if peinadosPorIndice.has(shape_idx):
 			var shape = peinadosPorIndice[shape_idx]
-			
+			cabelloElegidoPersistencia = shape.name
 			recuadro.global_position = shape.global_position
 			match shape.name:
 				"Sprite1":
@@ -506,8 +490,9 @@ func _on_skin_cabellos_input_event(viewport: Node, event: InputEvent, shape_idx:
 				"Sprite6":
 					cambiarPeinado($CabellosInPlayer/Cabello6)
 				_:
-					for cabello in $CabellosInPlayer.get_children():
-						cabello.hide()
+					for cabellosPlayer in $CabellosInPlayer.get_children():
+						cabellosPlayer.hide()
+					Global.ropa = ""
 					
 
 func _on_skin_sombreros_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
@@ -515,6 +500,7 @@ func _on_skin_sombreros_input_event(viewport: Node, event: InputEvent, shape_idx
 		if sombrerosPorIndice.has(shape_idx):
 			var shape = sombrerosPorIndice[shape_idx]
 			recuadro.global_position = shape.global_position
+			sombreroElegidoPersistencia = shape.name
 			match shape.name:
 				"Sprite1":
 					cambiarSombrero($SombrerosInPlayer/Sombrero1)
@@ -553,12 +539,14 @@ func _on_skin_sombreros_input_event(viewport: Node, event: InputEvent, shape_idx
 				_:
 					for sombrero in $SombrerosInPlayer.get_children():
 						sombrero.hide()
+					Global.sombrero = ""
 
 func _on_skin_ropa_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		if ropaPorIndice.has(shape_idx):
 			var shape = ropaPorIndice[shape_idx]
 			recuadro.global_position = shape.global_position
+			ropaElegidaPersistencia = shape.name
 			match shape.name:
 				"Sprite1":
 					cambiarRopa($RopaInPlayer/Ropa1)
@@ -591,6 +579,7 @@ func _on_skin_ropa_input_event(viewport: Node, event: InputEvent, shape_idx: int
 				_:
 					for ropaInPlayer in $RopaInPlayer.get_children():
 						ropaInPlayer.hide()
+					Global.ropa = ""
 				
 
 func cambiarPeinado(cabelloElegido):
@@ -610,3 +599,106 @@ func cambiarRopa(ropaElegida):
 	ropaElegida.show()
 	
    
+
+func _on_guardar_pressed() -> void:
+	# Guardar SOLO NÚMEROS pero registrando qué tipo era
+	
+	Global.skin = colorElegidoPersistencia.replace("Sprite", "")
+	Global.cabello = cabelloElegidoPersistencia.replace("Sprite", "")
+	Global.sombrero = sombreroElegidoPersistencia.replace("Sprite", "")
+	Global.ropa = ropaElegidaPersistencia.replace("Sprite", "")
+	
+	# Guardar en archivo local
+	Global.guardar_personalizacion()
+	
+	print("Datos guardados (números):")
+	print("Skin:", Global.skin, " Cabello:", Global.cabello, 
+		  " Sombrero:", Global.sombrero, " Ropa:", Global.ropa)
+	$Label1.show()
+
+func _on_resetear_datos_pressed() -> void:
+	var save_path = "user://personalizacion_save.json"
+	
+	# Eliminar archivo
+	DirAccess.remove_absolute(save_path)
+	
+	# Resetear valores en Global
+	Global.skin = ""
+	Global.cabello = ""
+	Global.sombrero = ""
+	Global.ropa = ""
+	
+	# Resetear variables locales
+	colorElegidoPersistencia = ""
+	cabelloElegidoPersistencia = ""
+	sombreroElegidoPersistencia = ""
+	ropaElegidaPersistencia = ""
+	
+	# Resetear visualización
+	aplicar_personalizacion(0)  # Skin por defecto
+	
+	# Ocultar todos los accesorios
+	for cabelloInplayer in $CabellosInPlayer.get_children():
+		cabelloInplayer.hide()
+	for sombreroInplayer in $SombrerosInPlayer.get_children():
+		sombreroInplayer.hide()
+	for ropaInplayer in $RopaInPlayer.get_children():
+		ropaInplayer.hide()
+	
+	$Label2.show()
+	print("✅ Datos reseteados completamente")
+
+func cargar_personalizacion_guardada():
+	
+	colorElegidoPersistencia = Global.skin
+	cabelloElegidoPersistencia = Global.cabello
+	sombreroElegidoPersistencia = Global.sombrero
+	ropaElegidaPersistencia = Global.ropa
+	
+# Cargar skin del personaje
+	if Global.skin != "":
+		var ruta = "res://Art/Personalizacion/Front/Front" + Global.skin + ".png"
+		var texture = load(ruta)
+		if texture:
+			player.texture = texture
+			print("Skin cargada:", Global.skin)
+	
+	# Cargar cabello
+	if Global.cabello != "" and Global.cabello != "null":  # ← AQUÍ
+		# 1. Ocultar todos
+		for i in $CabellosInPlayer.get_children():
+			i.hide()
+		
+		# 2. Buscar el nodo específico
+		var cabello_nodo = $CabellosInPlayer.get_node("Cabello" + str(Global.cabello))
+		
+		# 3. Verificar que existe ANTES de mostrar
+		if cabello_nodo != null:
+			cabello_nodo.show()
+			print("Cabello cargado: Cabello" + str(Global.cabello))
+		else:
+			print("⚠️ No existe Cabello" + str(Global.cabello))
+
+	
+	
+	# Cargar sombrero
+	# Cargar sombrero - misma lógica
+	if Global.sombrero != "" and Global.sombrero != "null":
+		for i in $SombrerosInPlayer.get_children():
+			i.hide()
+		
+		var sombrero_nodo = $SombrerosInPlayer.get_node("Sombrero" + str(Global.sombrero))
+		if sombrero_nodo != null:
+			sombrero_nodo.show()
+	
+	# Cargar ropa - misma lógica
+	if Global.ropa != "" and Global.ropa != "null":
+		for i in $RopaInPlayer.get_children():
+			i.hide()
+		
+		var ropa_nodo = $RopaInPlayer.get_node("Ropa" + str(Global.ropa))
+		if ropa_nodo != null:
+			ropa_nodo.show()
+	
+	return true
+		

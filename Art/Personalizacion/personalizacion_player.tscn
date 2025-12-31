@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://ci0o4viab76my"]
+[gd_scene load_steps=61 format=3 uid="uid://ci0o4viab76my"]
 
 [ext_resource type="Script" uid="uid://b477xd00j8vic" path="res://Art/Personalizacion/personalizacion_player.gd" id="1_qch5b"]
 [ext_resource type="Shader" uid="uid://dcix4qnd8pcom" path="res://Art/Menu/scroll.gdshader" id="2_i5de5"]
@@ -85,6 +85,8 @@ size = Vector2(108.649, 100.61)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a65p5"]
 size = Vector2(172.5, 95.515)
 
+[sub_resource type="CanvasTexture" id="CanvasTexture_rlwa6"]
+
 [node name="PersonalizacionPlayer" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -93,6 +95,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_qch5b")
+blink_speed = 20.0
 
 [node name="TextureRect" type="TextureRect" parent="."]
 texture_filter = 1
@@ -1301,6 +1304,7 @@ scale = Vector2(8.955, 9.03)
 texture = ExtResource("8_vq7px")
 
 [node name="Cabello3" type="Sprite2D" parent="CabellosInPlayer"]
+visible = false
 texture_filter = 1
 position = Vector2(861.505, 339.825)
 scale = Vector2(8.995, 9.296)
@@ -1326,6 +1330,11 @@ texture_filter = 1
 position = Vector2(861.475, 339.83)
 scale = Vector2(9, 9.076)
 texture = ExtResource("12_umn4y")
+
+[node name="Cabello7" type="Sprite2D" parent="CabellosInPlayer"]
+position = Vector2(25.75, 13.75)
+scale = Vector2(52.5, 28.5)
+texture = SubResource("CanvasTexture_rlwa6")
 
 [node name="SombrerosInPlayer" parent="." instance=ExtResource("12_m3j35")]
 position = Vector2(796, 245)
@@ -1425,6 +1434,8 @@ texture_filter = 1
 position = Vector2(0.2, 8.400001)
 scale = Vector2(1.795, 1.3857142)
 texture = ExtResource("18_diee7")
+
+[node name="Sombrero18" type="Sprite2D" parent="SombrerosInPlayer"]
 
 [node name="RopaInPlayer" type="Node2D" parent="."]
 
@@ -1550,6 +1561,32 @@ offset_right = 1091.0
 offset_bottom = 623.0
 text = "GUARDAR"
 
+[node name="Label1" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 879.0
+offset_top = 518.0
+offset_right = 1011.0
+offset_bottom = 541.0
+text = "Datos guardados"
+
+[node name="ResetearDatos" type="Button" parent="."]
+layout_mode = 0
+offset_left = 927.0
+offset_top = 452.0
+offset_right = 1051.0
+offset_bottom = 483.0
+text = "Resetear datos"
+
+[node name="Label2" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 684.0
+offset_top = 558.0
+offset_right = 816.0
+offset_bottom = 581.0
+text = "Datos Reseteados"
+
 [connection signal="pressed" from="Iniciar" to="." method="_on_Iniciar_pressed"]
 [connection signal="pressed" from="BtnDerecha" to="." method="_on_btn_derecha_pressed"]
 [connection signal="pressed" from="BtnIzquierda" to="." method="_on_btn_izquierda_pressed"]
@@ -1561,6 +1598,7 @@ text = "GUARDAR"
 [connection signal="input_event" from="SkinRopa" to="." method="_on_skin_ropa_input_event"]
 [connection signal="input_event" from="IndiceEleccion" to="." method="_on_indice_eleccion_input_event"]
 [connection signal="pressed" from="Guardar" to="." method="_on_guardar_pressed"]
+[connection signal="pressed" from="ResetearDatos" to="." method="_on_resetear_datos_pressed"]
 
 [editable path="Sombreros"]
 [editable path="SombrerosInPlayer"]
