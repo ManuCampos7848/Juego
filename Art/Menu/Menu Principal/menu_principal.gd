@@ -4,6 +4,7 @@ extends Control
 @onready var player = $PlayerFront
 @onready var cabellos = $Cabellos
 @onready var ropa = $Ropa
+@onready var pantalones = $Pantalones
 
 # ______________________ Fade ___________________________________
 var fade_timer := 0.0
@@ -81,11 +82,13 @@ func _ready() -> void:
 	fade_overlay.show()
 	fade_overlay.color.a = 1.0
 	
-	# Intentar cargar personalización guardada
+	# Intentar cargar personalización guardadas
 	if cargar_personalizacion_guardada():
 		print("Personalización cargada desde archivo")
 		if Global.cabello == "":
 			$Cabellos/Cabello5.hide()
+		if Global.pantalon == "":
+			$Pantalones/Pantalon1.hide()
 	else:
 		# Si no hay archivo, iniciar timer aleatorio
 		print("No hay datos guardados, iniciando aleatorio...")
@@ -144,9 +147,19 @@ func cargar_personalizacion_guardada() -> bool:
 			ropa_guardada.show()
 			print("Ropa cargada:", ropa_nombre)
 	
+	if Global.pantalon != "":
+		for i in range(1, 14):
+			var pantalones_nodo = pantalones.get_node("Ropa" + str(i))
+			if pantalones_nodo:
+				pantalones_nodo.hide()
+		
+		var pantalon_nombre = "Pantalon" + Global.pantalon
+		var pantalon_guardado = pantalones.get_node(pantalon_nombre)
+		if pantalon_guardado:
+			pantalon_guardado.show()
+			print("Ropa cargada:", pantalon_nombre)
+	
 	return true
-
-
 
 func sombrerosAleatorios():
 	# Primero ocultar todos los sombreros
@@ -202,11 +215,24 @@ func ropaAleatoria():
 		ropaElegida.show()
 		print("Mostrando: Ropa" + str(num))
 		
+func pantalonesAleatorios():
+	
+	for i in range(1,14):
+		var pantalonNodo = pantalones.get_node("Pantalon"+str(i))
+		pantalonNodo.hide()
+	
+	var numAleatorio = randi_range(1,13)
+	var pantalonElegido = pantalones.get_node("Pantalon"+str(numAleatorio))
+	
+	if pantalonElegido:
+		pantalonElegido.show()
+		
 func _on_timer_timeout() -> void:
 	sombrerosAleatorios()
 	skinColorPersonajeAleatorio()
 	cabelloAelatorio()
 	ropaAleatoria()
+	pantalonesAleatorios()
 
 
 func salirButton() -> void:

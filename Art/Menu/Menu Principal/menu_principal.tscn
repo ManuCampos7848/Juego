@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://ck7idj2otqth2"]
+[gd_scene load_steps=56 format=3 uid="uid://ck7idj2otqth2"]
 
 [ext_resource type="Script" uid="uid://dregloms00b4a" path="res://Art/Menu/Menu Principal/menu_principal.gd" id="1_bq1sv"]
 [ext_resource type="Texture2D" uid="uid://d10qxpmnwhy2o" path="res://Art/Menu/Menu Principal/BtnNiveles.png" id="1_snche"]
@@ -41,7 +41,19 @@
 [ext_resource type="Texture2D" uid="uid://0he8rpos8ljt" path="res://Art/Personalizacion/Ropa/Ropa12.png" id="39_cee26"]
 [ext_resource type="Texture2D" uid="uid://bc8ssqxxubsh4" path="res://Art/Personalizacion/Ropa/Ropa13.png" id="40_0q17d"]
 [ext_resource type="Texture2D" uid="uid://82am16wsaj8n" path="res://Art/Personalizacion/Ropa/Ropa14.png" id="41_scqrj"]
-[ext_resource type="Texture2D" uid="uid://bfj1sfeqb05cg" path="res://Art/Personalizacion/Ropa/Pantalon.png" id="42_ilnpq"]
+[ext_resource type="Texture2D" uid="uid://dk5skexhjbat2" path="res://Art/Personalizacion/Pantalones/Pantalon1.png" id="42_0q17d"]
+[ext_resource type="Texture2D" uid="uid://6qo5oa8ir8fs" path="res://Art/Personalizacion/Pantalones/Pantalon2.png" id="43_scqrj"]
+[ext_resource type="Texture2D" uid="uid://bjof6m0c1vh2e" path="res://Art/Personalizacion/Pantalones/Pantalon3.png" id="44_v12wv"]
+[ext_resource type="Texture2D" uid="uid://biduvpsq1q7dc" path="res://Art/Personalizacion/Pantalones/Pantalon4.png" id="45_l8m41"]
+[ext_resource type="Texture2D" uid="uid://cdnbeewoscp8y" path="res://Art/Personalizacion/Pantalones/Pantalon5.png" id="46_2eew8"]
+[ext_resource type="Texture2D" uid="uid://b1c6ucnket21b" path="res://Art/Personalizacion/Pantalones/Pantalon6.png" id="47_8p8f7"]
+[ext_resource type="Texture2D" uid="uid://b6avu0bebmv5" path="res://Art/Personalizacion/Pantalones/Pantalon7.png" id="48_jd4bx"]
+[ext_resource type="Texture2D" uid="uid://brsa6q4tju5x3" path="res://Art/Personalizacion/Pantalones/Pantalon9.png" id="49_6u8dv"]
+[ext_resource type="Texture2D" uid="uid://ixr0mei6jccp" path="res://Art/Personalizacion/Pantalones/Pantalon8.png" id="49_scqrj"]
+[ext_resource type="Texture2D" uid="uid://0o7rsmcy5a2g" path="res://Art/Personalizacion/Pantalones/Pantalon10.png" id="51_v12wv"]
+[ext_resource type="Texture2D" uid="uid://34qbgnrb7ej4" path="res://Art/Personalizacion/Pantalones/Pantalon11.png" id="52_l8m41"]
+[ext_resource type="Texture2D" uid="uid://co773ybbsohib" path="res://Art/Personalizacion/Pantalones/Pantalon12.png" id="53_2eew8"]
+[ext_resource type="Texture2D" uid="uid://dudqfsg1ogxmk" path="res://Art/Personalizacion/Pantalones/Pantalon13.png" id="54_8p8f7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pqj5o"]
 shader = ExtResource("2_njfe6")
@@ -74,22 +86,24 @@ texture = ExtResource("3_2yo5o")
 wait_time = 0.3
 
 [node name="Patita" type="Sprite2D" parent="."]
-position = Vector2(829.937, 462.76)
+position = Vector2(613.937, 508.76)
 scale = Vector2(9.018, 4.51)
 texture = ExtResource("21_phiyn")
+metadata/_edit_group_ = true
 
 [node name="Patita2" type="Sprite2D" parent="."]
-position = Vector2(793.982, 462.76)
+position = Vector2(577.982, 508.76)
 scale = Vector2(9.018, 4.51)
 texture = ExtResource("21_phiyn")
+metadata/_edit_group_ = true
 
 [node name="TextureButton" type="TextureButton" parent="."]
 texture_filter = 1
 layout_mode = 0
-offset_left = 40.0
-offset_top = 80.0
-offset_right = 159.0
-offset_bottom = 103.0
+offset_left = 64.0
+offset_top = 296.0
+offset_right = 183.0
+offset_bottom = 319.0
 scale = Vector2(3, 3)
 texture_normal = ExtResource("1_snche")
 texture_pressed = ExtResource("1_snche")
@@ -97,10 +111,10 @@ texture_pressed = ExtResource("1_snche")
 [node name="TextureButton2" type="TextureButton" parent="."]
 texture_filter = 1
 layout_mode = 0
-offset_left = 40.0
-offset_top = 174.0
-offset_right = 159.0
-offset_bottom = 197.0
+offset_left = 432.0
+offset_top = 50.0
+offset_right = 551.0
+offset_bottom = 73.0
 scale = Vector2(3, 3)
 texture_normal = ExtResource("2_0kn2n")
 texture_pressed = ExtResource("24_422h3")
@@ -119,10 +133,10 @@ texture_normal = ExtResource("4_baunw")
 [node name="TextureButton3" type="TextureButton" parent="."]
 texture_filter = 1
 layout_mode = 0
-offset_left = 40.0
-offset_top = 367.0
-offset_right = 159.0
-offset_bottom = 390.0
+offset_left = 768.0
+offset_top = 304.0
+offset_right = 887.0
+offset_bottom = 327.0
 scale = Vector2(3, 3)
 texture_normal = ExtResource("3_3jp5v")
 texture_pressed = ExtResource("24_422h3")
@@ -130,21 +144,23 @@ texture_pressed = ExtResource("24_422h3")
 [node name="TextureButton4" type="TextureButton" parent="."]
 texture_filter = 1
 layout_mode = 0
-offset_left = 40.0
-offset_top = 503.0
-offset_right = 159.0
-offset_bottom = 526.0
+offset_left = 424.0
+offset_top = 560.0
+offset_right = 543.0
+offset_bottom = 583.0
 scale = Vector2(3, 3)
 texture_normal = ExtResource("4_a38lc")
 
 [node name="PlayerFront" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(812, 341.00003)
+position = Vector2(596, 387.00003)
 scale = Vector2(4.495, 4.51)
 texture = ExtResource("5_bq1sv")
+metadata/_edit_group_ = true
 
 [node name="Cabellos" type="Node2D" parent="."]
-position = Vector2(-54, -10)
+position = Vector2(-270, 36)
+metadata/_edit_group_ = true
 
 [node name="Cabello1" type="Sprite2D" parent="Cabellos"]
 visible = false
@@ -188,8 +204,9 @@ scale = Vector2(9, 9.076)
 texture = ExtResource("15_ckul6")
 
 [node name="Sombreros" parent="." instance=ExtResource("6_a38lc")]
-position = Vector2(811, 182)
+position = Vector2(595, 228)
 scale = Vector2(5, 5)
+metadata/_edit_group_ = true
 
 [node name="Sombrero1" parent="Sombreros" index="0"]
 position = Vector2(0.10500336, -0.20000267)
@@ -287,7 +304,8 @@ scale = Vector2(1.795, 1.3857142)
 texture = ExtResource("27_vij38")
 
 [node name="Ropa" type="Node2D" parent="."]
-position = Vector2(15, -63)
+position = Vector2(-201, -17)
+metadata/_edit_group_ = true
 
 [node name="Ropa1" type="Sprite2D" parent="Ropa"]
 visible = false
@@ -387,11 +405,98 @@ position = Vector2(797, 455.792)
 scale = Vector2(9.011, 9.069333)
 texture = ExtResource("41_scqrj")
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
+[node name="Pantalones" type="Node2D" parent="."]
+position = Vector2(-216, 46)
+
+[node name="Pantalon1" type="Sprite2D" parent="Pantalones"]
 texture_filter = 1
-position = Vector2(812, 438)
-scale = Vector2(8.995, 9.001)
-texture = ExtResource("42_ilnpq")
+position = Vector2(811.975, 442.49997)
+scale = Vector2(9, 8.999997)
+texture = ExtResource("42_0q17d")
+
+[node name="Pantalon2" type="Sprite2D" parent="Pantalones"]
+visible = false
+texture_filter = 1
+position = Vector2(811.975, 442.5)
+scale = Vector2(9, 9.000004)
+texture = ExtResource("43_scqrj")
+
+[node name="Pantalon3" type="Sprite2D" parent="Pantalones"]
+visible = false
+texture_filter = 1
+position = Vector2(811.975, 442.5)
+scale = Vector2(9, 9.000004)
+texture = ExtResource("44_v12wv")
+
+[node name="Pantalon4" type="Sprite2D" parent="Pantalones"]
+visible = false
+texture_filter = 1
+position = Vector2(811.975, 442.5)
+scale = Vector2(9, 9.000004)
+texture = ExtResource("45_l8m41")
+
+[node name="Pantalon5" type="Sprite2D" parent="Pantalones"]
+visible = false
+texture_filter = 1
+position = Vector2(811.975, 442.5)
+scale = Vector2(9, 9.000004)
+texture = ExtResource("46_2eew8")
+
+[node name="Pantalon6" type="Sprite2D" parent="Pantalones"]
+visible = false
+texture_filter = 1
+position = Vector2(811.975, 442.5)
+scale = Vector2(9, 9.000004)
+texture = ExtResource("47_8p8f7")
+
+[node name="Pantalon7" type="Sprite2D" parent="Pantalones"]
+visible = false
+texture_filter = 1
+position = Vector2(811.975, 442.5)
+scale = Vector2(9, 9.000004)
+texture = ExtResource("48_jd4bx")
+
+[node name="Pantalon8" type="Sprite2D" parent="Pantalones"]
+visible = false
+texture_filter = 1
+position = Vector2(811.975, 442.5)
+scale = Vector2(9, 9.000004)
+texture = ExtResource("49_scqrj")
+
+[node name="Pantalon9" type="Sprite2D" parent="Pantalones"]
+visible = false
+texture_filter = 1
+position = Vector2(811.975, 442.5)
+scale = Vector2(9, 9.000004)
+texture = ExtResource("49_6u8dv")
+
+[node name="Pantalon10" type="Sprite2D" parent="Pantalones"]
+visible = false
+texture_filter = 1
+position = Vector2(811.975, 442.5)
+scale = Vector2(9, 9.000004)
+texture = ExtResource("51_v12wv")
+
+[node name="Pantalon11" type="Sprite2D" parent="Pantalones"]
+visible = false
+texture_filter = 1
+position = Vector2(811.975, 442.5)
+scale = Vector2(9, 9.000004)
+texture = ExtResource("52_l8m41")
+
+[node name="Pantalon12" type="Sprite2D" parent="Pantalones"]
+visible = false
+texture_filter = 1
+position = Vector2(811.975, 442.5)
+scale = Vector2(9, 9.000004)
+texture = ExtResource("53_2eew8")
+
+[node name="Pantalon13" type="Sprite2D" parent="Pantalones"]
+visible = false
+texture_filter = 1
+position = Vector2(811.975, 442.5)
+scale = Vector2(9, 9.000004)
+texture = ExtResource("54_8p8f7")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="TextureButton2" to="." method="_on_texture_button_2_pressed"]

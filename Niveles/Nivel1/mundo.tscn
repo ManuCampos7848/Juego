@@ -1,8 +1,8 @@
 [gd_scene load_steps=19 format=3 uid="uid://dottnihn6c77w"]
 
-[ext_resource type="Script" uid="uid://dfv1v03px73q2" path="res://mundo.gd" id="1_kjq7n"]
+[ext_resource type="Script" uid="uid://dfv1v03px73q2" path="res://Niveles/Nivel1/mundo.gd" id="1_kjq7n"]
 [ext_resource type="Texture2D" uid="uid://cwslomajri3cd" path="res://Art/TileMap/MapaCielo/Back.png" id="2_744hw"]
-[ext_resource type="PackedScene" uid="uid://chbd8h0ksv6s1" path="res://burbujas.tscn" id="4_qrhk7"]
+[ext_resource type="PackedScene" uid="uid://chbd8h0ksv6s1" path="res://Niveles/Nivel1/burbujas.tscn" id="4_qrhk7"]
 [ext_resource type="Texture2D" uid="uid://boxjotc5h0nld" path="res://Art/Cielo.png" id="5_nddul"]
 [ext_resource type="Texture2D" uid="uid://ttg4co6ik62n" path="res://Art/Botones/Izquierda.png" id="6_6khlg"]
 [ext_resource type="Texture2D" uid="uid://b50bjolek8wns" path="res://Art/Botones/IzquierdaPressed.png" id="7_mb2i5"]
@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://c6r3u7klsddj4" path="res://Art/Botones/SaltoPressed.png" id="11_dvjjk"]
 [ext_resource type="PackedScene" uid="uid://wsakxayj4ti0" path="res://Art/TileMap/MapaCielo/Bloques Desprendimiento/NubeCaida.tscn" id="11_qcc2h"]
 [ext_resource type="PackedScene" uid="uid://8288fxo2rom1" path="res://Art/Personaje/personaje.tscn" id="16_qiu26"]
-[ext_resource type="PackedScene" uid="uid://cm2nwnsfbomfu" path="res://contador_vida.tscn" id="18_6hpp2"]
+[ext_resource type="PackedScene" uid="uid://cm2nwnsfbomfu" path="res://Niveles/Complementos/ContadorVida/contador_vida.tscn" id="18_6hpp2"]
 [ext_resource type="PackedScene" uid="uid://cm6ue3inx4k3w" path="res://Art/TileMap/MapaCielo/elevador.tscn" id="19_8lmmg"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_d1p0t"]
@@ -77,6 +77,7 @@ texture = ExtResource("5_nddul")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 0
+visible = false
 follow_viewport_scale = 2.0
 
 [node name="ButIzquierda" type="TouchScreenButton" parent="CanvasLayer"]

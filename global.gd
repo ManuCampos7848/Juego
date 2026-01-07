@@ -5,6 +5,7 @@ var skin: String = ""
 var cabello: String = ""
 var sombrero: String = ""
 var ropa: String = ""
+var pantalon: String = ""
 
 # Ruta del archivo de guardado
 const SAVE_PATH = "user://personalizacion_save.json"
@@ -14,7 +15,8 @@ func guardar_personalizacion():
 		"skin": skin,
 		"cabello": cabello,
 		"sombrero": sombrero,
-		"ropa": ropa
+		"ropa": ropa,
+		"pantalon": pantalon
 	}
 	
 	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
@@ -37,6 +39,7 @@ func cargar_personalizacion():
 			cabello = datos.get("cabello", "")
 			sombrero = datos.get("sombrero", "")
 			ropa = datos.get("ropa", "")
+			pantalon = datos.get("pantalon", "")
 			print("Datos cargados desde archivo")
 			return true
 	print("No hay datos guardados")

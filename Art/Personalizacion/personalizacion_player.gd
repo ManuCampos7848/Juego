@@ -4,6 +4,7 @@ extends Control
 @onready var cabellos = $Cabellos
 @onready var sombreros =$Sombreros
 @onready var ropa = $Ropa
+@onready var pantalones = $Pantalones
 @onready var player = $PlayerFront
 
 
@@ -21,6 +22,7 @@ var colorElegidoPersistencia : String = ""
 var cabelloElegidoPersistencia : String = ""
 var sombreroElegidoPersistencia : String = ""
 var ropaElegidaPersistencia : String = ""
+var pantalonElegidoPersistencia : String = ""
 
 
 # ___________________________ FADE IN/OUT ________________________________________________________
@@ -93,6 +95,7 @@ func _ready() -> void:
 	seccionSombrerosIndices()
 	seccionPeinadosIndices()
 	seccionRopaIndices()
+	seccionPantalonesIndices()
 	
 	fade_overlay.color = Color.BLACK
 	fade_overlay.size = get_viewport().get_visible_rect().size
@@ -116,7 +119,7 @@ func cabelloAelatorio():
 	
 	if cabelloElegido:
 		cabelloElegido.show()
-	
+
 func ropaAleatoria():
 	# Ocultar todos los cabellos
 	for i in range(1, 15):  # Cambié a 7 si tienes 6 cabellos
@@ -130,12 +133,23 @@ func ropaAleatoria():
 	
 	if ropaElegida:
 		ropaElegida.show()
-		
-		
+
+func pantalonesAleatorios():
+	
+	for i in range(1,14):
+		var pantalonNodo = pantalones.get_node("Pantalon"+str(i))
+		pantalonNodo.hide()
+	
+	var numAleatorio = randi_range(1,13)
+	var pantalonElegido = pantalones.get_node("Pantalon"+str(numAleatorio))
+	
+	if pantalonElegido:
+		pantalonElegido.show()
+
 func _on_timer_timeout() -> void:
 	sombrerosAleatorios()
-	#skinColorPersonajeAleatorio()
 	cabelloAelatorio()
+	pantalonesAleatorios()
 	ropaAleatoria()
 	pass
 
@@ -171,6 +185,7 @@ var formas_por_indice: Dictionary
 var indiceEleccion: Dictionary
 var peinadosPorIndice: Dictionary
 var ropaPorIndice: Dictionary
+var pantalonPorIndice: Dictionary
 
 
 func seccionRopaIndices():
@@ -181,8 +196,7 @@ func seccionRopaIndices():
 		if child is CollisionShape2D:
 			ropaPorIndice[idx] = child
 			idx += 1
-			
-			
+
 func seccionPeinadosIndices():
 	peinadosPorIndice = {}
 	var idx = 0
@@ -192,7 +206,16 @@ func seccionPeinadosIndices():
 			peinadosPorIndice[idx] = child
 			idx += 1
 			
-			
+func seccionPantalonesIndices():
+	pantalonPorIndice = {}
+	
+	var idx = 0
+	var shapes = $SkinPantalones.get_children()
+	for child in shapes:
+		if child is CollisionShape2D:
+			pantalonPorIndice[idx] = child
+			idx += 1 
+	
 func seccionSombrerosIndices():
 	sombrerosPorIndice = {}
 	var idx = 0
@@ -258,6 +281,12 @@ func esconderElecciones():
 		if skinRopa is CollisionShape2D:
 			skinRopa.disabled = true
 		skinRopa.hide()
+		
+	var skinPantalones = $SkinPantalones.get_children()
+	for skinPantalon in skinPantalones:
+		if skinPantalon is CollisionShape2D:
+			skinPantalon.disabled = true
+		skinPantalon.hide()
 	
 	var elecciones = $Elecciones.get_children()
 	for eleccion in elecciones:
@@ -303,8 +332,10 @@ func _on_indice_eleccion_input_event(viewport: Node, event: InputEvent, shape_id
 					$Elecciones/Eleccion4.show()
 				"PantalonesIndice":
 					esconderElecciones()
+					$SkinPantalones.show()
+					habilitar_hijos_de($SkinPantalones)
 					$Elecciones/Eleccion5.show()
-					
+
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		if formas_por_indice.has(shape_idx):
@@ -407,68 +438,44 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 					aplicar_personalizacion(44)
 				"Sprite46":
 					aplicar_personalizacion(45)
-# ________________________________________________________________________________________________	
 
-
-func _on_btn_derecha_pressed() -> void:
-	
-	$PlayerFront.visible = false
-	$PlayerWalk.visible = true
-	
-	$PlayerWalk.flip_h = false
-	$PlayerWalk.play("walk")
-	pass # Replace with function body.
-
-func _on_btn_izquierda_pressed() -> void:
-	
-	start_scene_change("res://Art/Menu/Menu Principal/menu_principal.tscn")
-	
-	#$PlayerFront.visible = false
-	#$PlayerWalk.visible = true
-	
-	#$PlayerWalk.flip_h = true
-	#$PlayerWalk.play("walk")
-	pass # Replace with function body.
-
-func _on_btn_front_pressed() -> void:
-	$PlayerWalk.visible = false
-	$PlayerFront.visible = true
-
-
-
-
-func cargar_imagenes():
-	# Cargamos todas las variantes (1-45)
-	for i in range(1, 47):
-		# Cargar vista frontal
-		var pathFront = "res://Art/Personalizacion/Front/Front%d.png" % i
-		if ResourceLoader.exists(pathFront):
-			listaFront.append(load(pathFront))
-		else:
-			listaFront.append(null)
-			print("Advertencia: No se encontró ", pathFront)
-		
-		
-
-
-var texturaFront
-var ultimo_indice_seleccionado = 0
-
-func aplicar_personalizacion(indice: int):
-	if indice < listaFront.size() and listaFront[indice] != null:
-		$PlayerFront.texture = listaFront[indice]
-	
-	ultimo_indice_seleccionado = indice
-	print("Skin guardada: ", colorElegidoPersistencia)
-	
-
-
-# ___________________________________________________________________________________________
-
-
-func _on_Iniciar_pressed():
-	get_tree().change_scene_to_file("res://mundo.tscn")
-
+func _on_skin_pantalones_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		if pantalonPorIndice.has(shape_idx):
+			var shape = ropaPorIndice[shape_idx]
+			recuadro.global_position = shape.global_position
+			pantalonElegidoPersistencia = shape.name
+			match shape.name:
+				"Sprite1":
+					cambiarPantalon($PantalonesInPlayer/Pantalon1)
+				"Sprite2":
+					cambiarPantalon($PantalonesInPlayer/Pantalon2)
+				"Sprite3":
+					cambiarPantalon($PantalonesInPlayer/Pantalon3)
+				"Sprite4":
+					cambiarPantalon($PantalonesInPlayer/Pantalon4)
+				"Sprite5":
+					cambiarPantalon($PantalonesInPlayer/Pantalon5)
+				"Sprite6":
+					cambiarPantalon($PantalonesInPlayer/Pantalon6)
+				"Sprite7":
+					cambiarPantalon($PantalonesInPlayer/Pantalon7)
+				"Sprite8":
+					cambiarPantalon($PantalonesInPlayer/Pantalon8)
+				"Sprite9":
+					cambiarPantalon($PantalonesInPlayer/Pantalon9)
+				"Sprite10":
+					cambiarPantalon($PantalonesInPlayer/Pantalon10)
+				"Sprite11":
+					cambiarPantalon($PantalonesInPlayer/Pantalon11)
+				"Sprite12":
+					cambiarPantalon($PantalonesInPlayer/Pantalon12)
+				"Sprite13":
+					cambiarPantalon($PantalonesInPlayer/Pantalon13)
+				_:
+					for pantalonInPlayer in $PantalonesInPlayer.get_children():
+						pantalonInPlayer.hide()
+					Global.pantalon = ""
 
 func _on_skin_cabellos_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
@@ -493,7 +500,6 @@ func _on_skin_cabellos_input_event(viewport: Node, event: InputEvent, shape_idx:
 					for cabellosPlayer in $CabellosInPlayer.get_children():
 						cabellosPlayer.hide()
 					Global.ropa = ""
-					
 
 func _on_skin_sombreros_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
@@ -580,13 +586,68 @@ func _on_skin_ropa_input_event(viewport: Node, event: InputEvent, shape_idx: int
 					for ropaInPlayer in $RopaInPlayer.get_children():
 						ropaInPlayer.hide()
 					Global.ropa = ""
-				
+# ________________________________________________________________________________________________	
 
+
+func _on_btn_derecha_pressed() -> void:
+	
+	$PlayerFront.visible = false
+	$PlayerWalk.visible = true
+	
+	$PlayerWalk.flip_h = false
+	$PlayerWalk.play("walk")
+	pass # Replace with function body.
+
+func _on_btn_izquierda_pressed() -> void:
+	
+	start_scene_change("res://Art/Menu/Menu Principal/menu_principal.tscn")
+	
+	#$PlayerFront.visible = false
+	#$PlayerWalk.visible = true
+	
+	#$PlayerWalk.flip_h = true
+	#$PlayerWalk.play("walk")
+	pass # Replace with function body.
+
+func _on_btn_front_pressed() -> void:
+	$PlayerWalk.visible = false
+	$PlayerFront.visible = true
+
+func cargar_imagenes():
+	# Cargamos todas las variantes (1-45)
+	for i in range(1, 47):
+		# Cargar vista frontal
+		var pathFront = "res://Art/Personalizacion/Front/Front%d.png" % i
+		if ResourceLoader.exists(pathFront):
+			listaFront.append(load(pathFront))
+		else:
+			listaFront.append(null)
+			print("Advertencia: No se encontró ", pathFront)
+		
+		
+
+var texturaFront
+var ultimo_indice_seleccionado = 0
+
+func aplicar_personalizacion(indice: int):
+	if indice < listaFront.size() and listaFront[indice] != null:
+		$PlayerFront.texture = listaFront[indice]
+	
+	ultimo_indice_seleccionado = indice
+	print("Skin guardada: ", colorElegidoPersistencia)
+	
+# ___________________________________________________________________________________________
+
+
+func _on_Iniciar_pressed():
+	get_tree().change_scene_to_file("res://mundo.tscn")
+
+
+# _________________________ Funciones para cambiar en pantalla los accesorios ______________
 func cambiarPeinado(cabelloElegido):
 	for cabello in $CabellosInPlayer.get_children():
 		cabello.hide()
 	cabelloElegido.show()
-	
 
 func cambiarSombrero(sombreroElegido):
 	for sombrero in $SombrerosInPlayer.get_children():
@@ -597,9 +658,15 @@ func cambiarRopa(ropaElegida):
 	for ropaInPlayer in $RopaInPlayer.get_children():
 		ropaInPlayer.hide()
 	ropaElegida.show()
-	
-   
 
+func cambiarPantalon(pantalonEscodigo):
+	for pantalonInPlayer in $PantalonesInPlayer.get_children():
+		pantalonInPlayer.hide()
+	pantalonEscodigo.show()
+# ___________________________________________________________________________________________
+
+
+# _______________________ Persistencia _________________________________________
 func _on_guardar_pressed() -> void:
 	# Guardar SOLO NÚMEROS pero registrando qué tipo era
 	
@@ -607,13 +674,15 @@ func _on_guardar_pressed() -> void:
 	Global.cabello = cabelloElegidoPersistencia.replace("Sprite", "")
 	Global.sombrero = sombreroElegidoPersistencia.replace("Sprite", "")
 	Global.ropa = ropaElegidaPersistencia.replace("Sprite", "")
+	Global.pantalon = pantalonElegidoPersistencia.replace("Sprite", "")
 	
 	# Guardar en archivo local
 	Global.guardar_personalizacion()
 	
 	print("Datos guardados (números):")
 	print("Skin:", Global.skin, " Cabello:", Global.cabello, 
-		  " Sombrero:", Global.sombrero, " Ropa:", Global.ropa)
+		  " Sombrero:", Global.sombrero, " Ropa:", Global.ropa,
+		  " Pantalon:", Global.pantalon)
 	$Label1.show()
 
 func _on_resetear_datos_pressed() -> void:
@@ -627,12 +696,14 @@ func _on_resetear_datos_pressed() -> void:
 	Global.cabello = ""
 	Global.sombrero = ""
 	Global.ropa = ""
+	Global.pantalon = ""
 	
 	# Resetear variables locales
 	colorElegidoPersistencia = ""
 	cabelloElegidoPersistencia = ""
 	sombreroElegidoPersistencia = ""
 	ropaElegidaPersistencia = ""
+	pantalonElegidoPersistencia = ""
 	
 	# Resetear visualización
 	aplicar_personalizacion(0)  # Skin por defecto
@@ -644,6 +715,8 @@ func _on_resetear_datos_pressed() -> void:
 		sombreroInplayer.hide()
 	for ropaInplayer in $RopaInPlayer.get_children():
 		ropaInplayer.hide()
+	for pantalonInPlayer in $PantalonesInPlayer.get_children():
+		pantalonInPlayer.hide()
 	
 	$Label2.show()
 	print("✅ Datos reseteados completamente")
@@ -654,6 +727,7 @@ func cargar_personalizacion_guardada():
 	cabelloElegidoPersistencia = Global.cabello
 	sombreroElegidoPersistencia = Global.sombrero
 	ropaElegidaPersistencia = Global.ropa
+	pantalonElegidoPersistencia = Global.pantalon
 	
 # Cargar skin del personaje
 	if Global.skin != "":
@@ -678,8 +752,6 @@ func cargar_personalizacion_guardada():
 			print("Cabello cargado: Cabello" + str(Global.cabello))
 		else:
 			print("⚠️ No existe Cabello" + str(Global.cabello))
-
-	
 	
 	# Cargar sombrero
 	# Cargar sombrero - misma lógica
@@ -699,6 +771,14 @@ func cargar_personalizacion_guardada():
 		var ropa_nodo = $RopaInPlayer.get_node("Ropa" + str(Global.ropa))
 		if ropa_nodo != null:
 			ropa_nodo.show()
-	
-	return true
+
+	if Global.pantalon != "" and Global.pantalon != "null":
+		for i in $PantalonesInPlayer.get_children():
+			i.hide()
 		
+		var pantalon_nodo = $PantalonesInPlayer.get_node("Pantalon" + str(Global.pantalon))
+		if pantalon_nodo != null:
+			pantalon_nodo.show()
+
+	return true
+# ___________________________________________________________________________________________

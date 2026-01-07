@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=3 uid="uid://bwu83wwd1vmna"]
 
-[ext_resource type="Script" uid="uid://dfv1v03px73q2" path="res://mundo.gd" id="1_bkihj"]
+[ext_resource type="Script" uid="uid://dfv1v03px73q2" path="res://Niveles/Nivel1/mundo.gd" id="1_bkihj"]
 [ext_resource type="Texture2D" uid="uid://d04r8wvx0wb7x" path="res://Art/TileMap/MapaCielo/Untitled 03-16-2025 02-48-43 (2).png" id="2_hfwq1"]
 [ext_resource type="Texture2D" uid="uid://boxjotc5h0nld" path="res://Art/Cielo.png" id="3_qoorb"]
 [ext_resource type="Texture2D" uid="uid://ttg4co6ik62n" path="res://Art/Botones/Izquierda.png" id="4_lcoxl"]
@@ -9,8 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://cb2arsmr46v3c" path="res://Art/Botones/DerechaPressed.png" id="7_be3k7"]
 [ext_resource type="Texture2D" uid="uid://c4w4om2do01xg" path="res://Art/Botones/SaltoHover.png" id="8_p5p45"]
 [ext_resource type="Texture2D" uid="uid://c6r3u7klsddj4" path="res://Art/Botones/SaltoPressed.png" id="9_tur32"]
-[ext_resource type="PackedScene" uid="uid://cm2nwnsfbomfu" path="res://contador_vida.tscn" id="10_ckywv"]
-[ext_resource type="PackedScene" uid="uid://chbd8h0ksv6s1" path="res://burbujas.tscn" id="12_0qnj7"]
+[ext_resource type="PackedScene" uid="uid://cm2nwnsfbomfu" path="res://Niveles/Complementos/ContadorVida/contador_vida.tscn" id="10_ckywv"]
+[ext_resource type="PackedScene" uid="uid://chbd8h0ksv6s1" path="res://Niveles/Nivel1/burbujas.tscn" id="12_0qnj7"]
 [ext_resource type="PackedScene" uid="uid://cy53ufnec71gc" path="res://perder.tscn" id="13_vfhxn"]
 [ext_resource type="PackedScene" uid="uid://gg0pfofkfjb" path="res://Art/Prueba/NubePrueba.tscn" id="14_3y702"]
 [ext_resource type="PackedScene" uid="uid://wsakxayj4ti0" path="res://Art/TileMap/MapaCielo/Bloques Desprendimiento/NubeCaida.tscn" id="15_wfca4"]
